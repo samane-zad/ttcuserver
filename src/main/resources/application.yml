@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: application
+
+    # Oracle settings
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: samane
+    password: 46487379
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    database: oracle
+    show-sql: true
+    properties:
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.hazelcast.instance_name: TTCU
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8082
+
+
+
+
+
