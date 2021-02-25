@@ -8,6 +8,8 @@ spring:
     username: samane
     password: 46487379
     driver-class-name: oracle.jdbc.driver.OracleDriver
+    hikari:
+      auto-commit: true
   jpa:
     database-platform: org.hibernate.dialect.Oracle10gDialect
     database: oracle
@@ -16,7 +18,8 @@ spring:
       hibernate.connection.provider_disables_autocommit: true
       hibernate.cache.hazelcast.instance_name: TTCU
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
+
 
 server:
   port: 8082

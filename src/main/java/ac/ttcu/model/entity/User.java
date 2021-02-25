@@ -17,7 +17,7 @@ public class User implements Serializable {
     private String fName;
     @Column(name = "lName", columnDefinition = "NVARCHAR2(30)")
     private String lName;
-    @Column(name = "username", columnDefinition = "NVARCHAR2(8)")
+    @Column(name = "username", columnDefinition = "NVARCHAR2(10)")
     private String username;
     @Column(name = "password", columnDefinition = "NVARCHAR2(8)")
     private String password;

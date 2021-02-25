@@ -1,7 +1,5 @@
 package ac.ttcu.model.repository;
 
-import ac.ttcu.common.Log4j;
-import ac.ttcu.model.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -43,20 +41,6 @@ public class CrudRepository<T, I> {
         return query.getResultList();
     }
 
-    public User findOne(String username, String password) throws Exception {
 
-        Log4j.getLog().info("FindOne Entity:User");
-        Query query = entityManager.createQuery("select entity from user entity where entity.username=? and entity.password=?");
-        query.setParameter(0, username);
-        query.setParameter(1, password);
-
-        if (query.getMaxResults() > 0) {
-            Log4j.getLog().info("User Found");
-            return (User) query.getSingleResult();
-        } else {
-            Log4j.getLog().info("User Not Found");
-            throw new Exception("User Not Found");
-        }
-    }
 
 }
