@@ -25,6 +25,7 @@ public class User implements Serializable {
     private UserType userType;
 
 
+
     public User() {
     }
 
