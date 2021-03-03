@@ -24,8 +24,13 @@ public class AuthenticationController {
     private String signUp(@RequestBody User user) {
         try {
            logger.info("Request to save user ");
-            userService.save(user);
-            return Constants.SIGN_UP_SUCCEEDED;
+           if (isUserAlreadyDefined(user.getUsername())==true) {
+               return Constants.USERNAME_ALREADY_DEFINED;
+           }
+           else {
+               userService.save(user);
+               return Constants.SIGN_UP_SUCCEEDED;
+           }
         } catch (Exception e) {
             logger.error("Error while saving user info ");
             logger.error(e.getMessage());
@@ -36,10 +41,27 @@ public class AuthenticationController {
     @RequestMapping("/login")
     private ResponseEntity<User> login(@ModelAttribute User user) {
         try {
-            userService.userfindOne(user);
+            userService.userFindOne(user);
         } catch (Exception e) {
 
         }
         return ResponseEntity.ok(user);
+    }
+
+
+
+
+
+    private Boolean isUserAlreadyDefined(String username)throws Exception
+    {
+            User user=userService.userFindByUsername(username);
+            if (user!=null) {
+                logger.info("Username already defined");
+                return true;
+            }
+            else {
+                logger.info("Safe username");
+                return false;
+            }
     }
 }

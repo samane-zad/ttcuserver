@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@EnableAutoConfiguration
 @Table(name = "users")
 @Entity
 public class User implements Serializable {

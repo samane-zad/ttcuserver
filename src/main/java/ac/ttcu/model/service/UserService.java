@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserService {
     private static Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -18,12 +19,17 @@ public class UserService {
     UserRepository userRepository;
 
 
-    public User userfindOne(User user) throws Exception {
+    public User userFindOne(User user) throws Exception {
         logger.info("FindOne Entity:User");
-        return userRepository.userfindOne(user.getUsername(), user.getPassword());
+        return userRepository.userFindOne(user.getUsername(), user.getPassword());
     }
 
-    @Transactional
+    public User userFindByUsername(String username)throws Exception
+    {
+        logger.info("FindOne Entity:User By Username: "+username);
+        return userRepository.userFindByUsername(username);
+    }
+
     public void save(User user) throws Exception {
         logger.info("Save Entity " + user.getfName() + " " + user.getlName());
         userRepository.save(user);

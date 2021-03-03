@@ -17,10 +17,11 @@ public class TtcuApplication implements InitializingBean {
     private static Logger logger = LoggerFactory.getLogger(TtcuApplication.class);
 
     private static String port;
+    private static String ip;
 
 
     public static void main(String[] args)throws Exception {
-        String ip=InetAddress.getLocalHost().getHostAddress().toString();
+        ip=InetAddress.getLocalHost().getHostAddress().toString();
         SpringApplication ttcu=new SpringApplication(TtcuApplication.class);
         Environment env=ttcu.run(args).getEnvironment();
         port=env.getProperty("server.port");
