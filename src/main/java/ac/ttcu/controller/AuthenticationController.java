@@ -1,10 +1,10 @@
 package ac.ttcu.controller;
 
-import ac.ttcu.TtcuApplication;
 import ac.ttcu.common.Constants;
+import ac.ttcu.model.entity.UniMajor;
 import ac.ttcu.model.entity.User;
+import ac.ttcu.model.service.UniMajorService;
 import ac.ttcu.model.service.UserService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +18,22 @@ public class AuthenticationController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    UniMajorService uniMajorService;
 
     @PostMapping(value = "/signUp")
     @ResponseBody
     private String signUp(@RequestBody User user) {
         try {
-           logger.info("Request to save user ");
-           if (isUserAlreadyDefined(user.getUsername())==true) {
-               return Constants.USERNAME_ALREADY_DEFINED;
-           }
-           else {
-               userService.save(user);
-               return Constants.SIGN_UP_SUCCEEDED;
-           }
+            logger.info("Request to save user ");
+            UniMajor uniMajor = uniMajorService.findUniMajorById(user.getUniMajor().getId());
+            user.setUniMajor(uniMajor);
+            if (isUserAlreadyDefined(user.getUsername()) == true) {
+                return Constants.USERNAME_ALREADY_DEFINED;
+            } else {
+                userService.save(user);
+                return Constants.SIGN_UP_SUCCEEDED;
+            }
         } catch (Exception e) {
             logger.error("Error while saving user info ");
             logger.error(e.getMessage());

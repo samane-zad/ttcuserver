@@ -1,7 +1,7 @@
 package ac.ttcu.model.entity;
 
 import ac.ttcu.common.UserType;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,22 +12,27 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(name = "fName", columnDefinition = "NVARCHAR2(20)")
+    @NotNull
     private String fName;
-    @Column(name = "lName", columnDefinition = "NVARCHAR2(30)")
+    @NotNull
     private String lName;
-    @Column(name = "username", columnDefinition = "NVARCHAR2(10)")
+    @NotNull
     private String username;
-    @Column(name = "password", columnDefinition = "NVARCHAR2(8)")
+    @NotNull
     private String password;
-    @Column(name = "userType", columnDefinition = "NVARCHAR2(12)")
+    @NotNull
     private UserType userType;
-
+    private String adminCode;
+    @OneToOne(cascade = CascadeType.ALL)
+    private UniMajor uniMajor;
 
 
     public User() {
     }
 
+    public long getId() {
+        return id;
+    }
 
     public String getfName() {
         return fName;
@@ -69,4 +74,19 @@ public class User implements Serializable {
         this.userType = userType;
     }
 
+    public String getAdminCode() {
+        return adminCode;
+    }
+
+    public void setAdminCode(String adminCode) {
+        this.adminCode = adminCode;
+    }
+
+    public UniMajor getUniMajor() {
+        return uniMajor;
+    }
+
+    public void setUniMajor(UniMajor uniMajor) {
+        this.uniMajor = uniMajor;
+    }
 }
