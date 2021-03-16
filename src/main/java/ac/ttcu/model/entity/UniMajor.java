@@ -14,8 +14,10 @@ public class UniMajor implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Universities uni;
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Majors major;
 
     public UniMajor(Integer id) {

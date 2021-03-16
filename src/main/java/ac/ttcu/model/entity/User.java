@@ -23,7 +23,7 @@ public class User implements Serializable {
     @NotNull
     private UserType userType;
     private String adminCode;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private UniMajor uniMajor;
 
 

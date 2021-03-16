@@ -19,9 +19,9 @@ public class UserService {
     UserRepository userRepository;
 
 
-    public User userFindOne(User user) throws Exception {
+    public User userFindOne(String username,String password) throws Exception {
         logger.info("FindOne Entity:User");
-        return userRepository.userFindOne(user.getUsername(), user.getPassword());
+        return userRepository.userFindOne(username,password);
     }
 
     public User userFindByUsername(String username)throws Exception
