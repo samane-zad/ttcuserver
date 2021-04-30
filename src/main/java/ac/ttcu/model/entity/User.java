@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Table(name = "users")
 @Entity
@@ -21,7 +22,12 @@ public class User implements Serializable {
     @NotNull
     private String password;
     @NotNull
-    private UserType userType;
+    @ElementCollection(targetClass = UserType.class)
+    @CollectionTable(
+            name = "authorities",
+            joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
+    @Enumerated(EnumType.STRING)
+    private List<UserType> userType;
     private String adminCode;
     @OneToOne(cascade = CascadeType.MERGE)
     private UniMajor uniMajor;
@@ -30,9 +36,11 @@ public class User implements Serializable {
     public User() {
     }
 
+
     public long getId() {
         return id;
     }
+
 
     public String getfName() {
         return fName;
@@ -66,11 +74,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public UserType getUserType() {
+    public List<UserType> getUserType() {
         return userType;
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(List<UserType> userType) {
         this.userType = userType;
     }
 
