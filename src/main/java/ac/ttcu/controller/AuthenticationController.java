@@ -2,8 +2,8 @@ package ac.ttcu.controller;
 
 import ac.ttcu.common.Constants;
 import ac.ttcu.common.Message;
-import ac.ttcu.model.entity.UniMajor;
-import ac.ttcu.model.entity.User;
+import ac.ttcu.model.entity.table.UniMajor;
+import ac.ttcu.model.entity.table.User;
 import ac.ttcu.model.service.UniMajorService;
 import ac.ttcu.model.service.UserService;
 import org.slf4j.Logger;
@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-
 
 @RestController
 @RequestMapping("/auth")

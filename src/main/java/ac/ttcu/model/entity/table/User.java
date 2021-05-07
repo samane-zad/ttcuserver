@@ -1,4 +1,4 @@
-package ac.ttcu.model.entity;
+package ac.ttcu.model.entity.table;
 
 import ac.ttcu.common.UserType;
 import com.sun.istack.NotNull;

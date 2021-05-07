@@ -1,7 +1,6 @@
 package ac.ttcu.model.service;
 
-import ac.ttcu.TtcuApplication;
-import ac.ttcu.model.entity.User;
+import ac.ttcu.model.entity.table.User;
 import ac.ttcu.model.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

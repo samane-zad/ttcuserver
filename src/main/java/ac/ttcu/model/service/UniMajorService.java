@@ -1,6 +1,6 @@
 package ac.ttcu.model.service;
 
-import ac.ttcu.model.entity.UniMajor;
+import ac.ttcu.model.entity.table.UniMajor;
 import ac.ttcu.model.repository.CrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
