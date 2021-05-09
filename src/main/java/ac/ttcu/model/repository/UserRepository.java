@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
     @Query(name ="signUpQuery",value="select u from User u where u.username=?1")
-    User userFindByUsername(String username)throws Exception;
+    User userFindByUsername(String username);
 
     @Modifying
     @Query(value = "update User u set u.fName = ?1, u.lName = ?2,u.userType=?3 , u.username = ?4 , u.password=?5 where u.id=?6")

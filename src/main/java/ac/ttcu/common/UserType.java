@@ -1,9 +1,17 @@
 package ac.ttcu.common;
 
-public enum UserType {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum UserType implements GrantedAuthority {
 
     TEACHER,
-    STUDENT
+    STUDENT,
+    MASTER,
+    ADMIN;
 
 
+    @Override
+    public String getAuthority() {
+        return this.name();
+    }
 }

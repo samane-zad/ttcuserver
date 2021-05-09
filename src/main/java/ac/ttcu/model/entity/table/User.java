@@ -2,14 +2,17 @@ package ac.ttcu.model.entity.table;
 
 import ac.ttcu.common.UserType;
 import com.sun.istack.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 @Table(name = "users")
 @Entity
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -74,10 +77,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public List<UserType> getUserType() {
-        return userType;
-    }
-
     public void setUserType(List<UserType> userType) {
         this.userType = userType;
     }
@@ -96,5 +95,30 @@ public class User implements Serializable {
 
     public void setUniMajor(UniMajor uniMajor) {
         this.uniMajor = uniMajor;
+    }
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.userType;
     }
 }
