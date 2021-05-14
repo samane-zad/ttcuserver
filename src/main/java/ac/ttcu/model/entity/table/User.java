@@ -34,6 +34,7 @@ public class User implements Serializable, UserDetails {
     private String adminCode;
     @OneToOne(cascade = CascadeType.MERGE)
     private UniMajor uniMajor;
+    private Boolean enabled = true;
 
 
     public User() {
@@ -97,6 +98,17 @@ public class User implements Serializable, UserDetails {
         this.uniMajor = uniMajor;
     }
 
+    public List<UserType> getUserType() {
+        return userType;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
     @Override
     public boolean isAccountNonExpired() {

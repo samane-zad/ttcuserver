@@ -23,6 +23,7 @@ public class UserService implements UserDetailsService {
 
     public User userFindOne(String username,String password) throws Exception {
         logger.info("FindOne Entity:User");
+
         return userRepository.userFindOne(username,password);
     }
 

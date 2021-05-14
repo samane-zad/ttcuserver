@@ -43,43 +43,38 @@ public class AuthenticationController {
         } catch (Exception e) {
             logger.error("Error while saving user info ");
             logger.error(e.getMessage());
-            message=new Message(HttpStatus.INTERNAL_SERVER_ERROR,Constants.SIGN_UP_FAILED);
-            return ResponseEntity.ok(message) ;
+            message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.SIGN_UP_FAILED);
+            return ResponseEntity.ok(message);
         }
     }
 
-//    @PostMapping(value = "/login",produces = "application/json")
-//    @ResponseBody
-//    private ResponseEntity<Message> login(@RequestBody Map<String ,String> params) {
-//        Message message;
-//        try {
-//            User user=userService.userFindOne(params.get("username"),params.get("password"));
-//            if(user!=null) {
-//                logger.info("User found");
-//                message=new Message(HttpStatus.OK,Constants.LOGIN_SUCCEEDED,user);
-//                return ResponseEntity.ok(message);
-//            }
-//            else {
-//                logger.info("Bad credentials");
-//                message=new Message(HttpStatus.UNAUTHORIZED,Constants.LOGIN_FAILED);
-//                return ResponseEntity.ok(message);
-//            }
-//        } catch (Exception e) {
-//            message=new Message(HttpStatus.INTERNAL_SERVER_ERROR,Constants.LOGIN_FAILED);
-//            return ResponseEntity.ok(message);
-//        }
-//
-//    }
+    @PostMapping(value = "/login", produces = "application/json")
+    @ResponseBody
+    private ResponseEntity<Message> login(@RequestBody Map<String, String> params) {
+        Message message;
+        try {
+            User user = userService.userFindOne(params.get("username"), params.get("password"));
+            if (user != null) {
+                logger.info("User found");
+                message = new Message(HttpStatus.OK, Constants.LOGIN_SUCCEEDED, user);
+                return ResponseEntity.ok(message);
+            } else {
+                logger.info("Bad credentials");
+                message = new Message(HttpStatus.UNAUTHORIZED, Constants.LOGIN_FAILED);
+                return ResponseEntity.ok(message);
+            }
+        } catch (Exception e) {
+            message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.LOGIN_FAILED);
+            return ResponseEntity.ok(message);
+        }
+
+    }
 
 
-
-
-
-    private Boolean isUserAlreadyDefined(String username)throws Exception
-    {
-            User user= (User) userService.loadUserByUsername(username);
-            if (user!=null) {
-                logger.info("Username already defined");
+    private Boolean isUserAlreadyDefined(String username) throws Exception {
+        User user = (User) userService.loadUserByUsername(username);
+        if (user != null) {
+            logger.info("Username already defined");
                 return true;
             }
             else {

@@ -18,11 +18,19 @@ spring:
       hibernate.connection.provider_disables_autocommit: false
       hibernate.cache.hazelcast.instance_name: TTCU
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri:
+          se
 
 
 server:
   port: 8082
+
+
 
 
 
