@@ -2,14 +2,14 @@ package ac.ttcu.security;
 
 import ac.ttcu.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -26,10 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/auth/login").permitAll()
-                .antMatchers("/auth/signUp").hasAnyAuthority("ADMIN", "MASTER")
-                .antMatchers("/api/common").hasAnyAuthority("STUDENT", "TEACHER")
-                .antMatchers("/api/student").hasAnyAuthority("STUDENT")
-                .antMatchers("/api/teacher").hasAnyAuthority("TEACHER")
+//                .antMatchers("/auth/signUp").hasAnyAuthority("ADMIN", "MASTER")
+//                .antMatchers("/api/common").hasAnyAuthority("STUDENT", "TEACHER")
+//                .antMatchers("/api/student").hasAnyAuthority("STUDENT")
+//                .antMatchers("/api/teacher").hasAnyAuthority("TEACHER")
                 .anyRequest().authenticated();
     }
 
@@ -38,4 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService);
     }
 
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 }

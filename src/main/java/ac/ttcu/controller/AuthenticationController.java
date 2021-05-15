@@ -6,19 +6,30 @@ import ac.ttcu.model.entity.table.UniMajor;
 import ac.ttcu.model.entity.table.User;
 import ac.ttcu.model.service.UniMajorService;
 import ac.ttcu.model.service.UserService;
+import ac.ttcu.security.JWTAuth;
+import ac.ttcu.security.JWTUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
     private static Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+
+    @Autowired
+    private JWTUtils jwtUtils;
+
+    @Autowired
+    private AuthenticationManager manager;
 
     @Autowired
     UserService userService;
@@ -50,22 +61,19 @@ public class AuthenticationController {
 
     @PostMapping(value = "/login", produces = "application/json")
     @ResponseBody
-    private ResponseEntity<Message> login(@RequestBody Map<String, String> params) {
+    private ResponseEntity<Message> login(@RequestBody JWTAuth jwtAuth, HttpServletResponse response) {
         Message message;
         try {
-            User user = userService.userFindOne(params.get("username"), params.get("password"));
-            if (user != null) {
-                logger.info("User found");
-                message = new Message(HttpStatus.OK, Constants.LOGIN_SUCCEEDED, user);
-                return ResponseEntity.ok(message);
-            } else {
-                logger.info("Bad credentials");
-                message = new Message(HttpStatus.UNAUTHORIZED, Constants.LOGIN_FAILED);
-                return ResponseEntity.ok(message);
-            }
-        } catch (Exception e) {
-            message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.LOGIN_FAILED);
-            return ResponseEntity.ok(message);
+            manager.authenticate(new UsernamePasswordAuthenticationToken(jwtAuth.getUsername(), jwtAuth.getPassword()));
+            logger.info("Successfully authenticated {}", jwtAuth.getUsername());
+            response.addHeader("Authorization", jwtUtils.generateToken(jwtAuth.getUsername()));
+            message = new Message(HttpStatus.OK, Constants.LOGIN_SUCCEEDED);
+            return ResponseEntity.status(message.getHttpStatus()).body(message);
+
+        } catch (BadCredentialsException be) {
+            logger.info("Bad credentials");
+            message = new Message(HttpStatus.UNAUTHORIZED, Constants.LOGIN_FAILED);
+            return ResponseEntity.status(message.getHttpStatus()).body(message);
         }
 
     }
