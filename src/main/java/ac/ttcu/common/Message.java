@@ -2,6 +2,7 @@ package ac.ttcu.common;
 
 import org.springframework.http.HttpStatus;
 
+
 public class Message {
   private  HttpStatus httpStatus;
   private  String text;

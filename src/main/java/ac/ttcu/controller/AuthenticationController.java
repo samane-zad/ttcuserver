@@ -2,6 +2,7 @@ package ac.ttcu.controller;
 
 import ac.ttcu.common.Constants;
 import ac.ttcu.common.Message;
+import ac.ttcu.common.Utils;
 import ac.ttcu.model.entity.table.UniMajor;
 import ac.ttcu.model.entity.table.User;
 import ac.ttcu.model.service.UniMajorService;
@@ -26,11 +27,11 @@ public class AuthenticationController {
     private static Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     @Autowired
+    Utils utils;
+    @Autowired
     private JWTUtils jwtUtils;
-
     @Autowired
     private AuthenticationManager manager;
-
     @Autowired
     UserService userService;
     @Autowired
@@ -44,7 +45,7 @@ public class AuthenticationController {
             logger.info("Request to save user ");
             UniMajor uniMajor = uniMajorService.findUniMajorById(user.getUniMajor().getId());
             user.setUniMajor(uniMajor);
-            if (isUserAlreadyDefined(user.getUsername()) == true) {
+            if (utils.isUserAlreadyDefined(user.getUsername())) {
                 message=new Message(HttpStatus.NOT_ACCEPTABLE,Constants.USERNAME_ALREADY_DEFINED);
             } else {
                 userService.save(user);
@@ -79,15 +80,4 @@ public class AuthenticationController {
     }
 
 
-    private Boolean isUserAlreadyDefined(String username) throws Exception {
-        User user = (User) userService.loadUserByUsername(username);
-        if (user != null) {
-            logger.info("Username already defined");
-                return true;
-            }
-            else {
-                logger.info("Safe username");
-                return false;
-            }
-    }
 }
