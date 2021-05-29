@@ -25,7 +25,7 @@ public class User implements Serializable, UserDetails {
     @NotNull
     private String password;
     @NotNull
-    @ElementCollection(targetClass = UserType.class)
+    @ElementCollection(targetClass = UserType.class,fetch = FetchType.EAGER)
     @CollectionTable(
             name = "authorities",
             joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
