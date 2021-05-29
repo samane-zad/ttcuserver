@@ -19,4 +19,8 @@ public class JWTUtils {
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
     }
+    public String getUsername(String token)
+    {
+        return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody().getSubject();
+    }
 }

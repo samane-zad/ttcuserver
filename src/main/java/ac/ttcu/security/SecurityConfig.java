@@ -8,7 +8,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -16,10 +18,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     private UserService userService;
+    private final JWTFilter jwtFilter;
 
     @Autowired
-    SecurityConfig(UserService userService) {
+    SecurityConfig(UserService userService, JWTFilter jwtFilter) {
         this.userService = userService;
+        this.jwtFilter = jwtFilter;
     }
 
     @Override
@@ -32,7 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/common").hasAnyAuthority("STUDENT", "TEACHER")
                 .antMatchers("/api/student").hasAnyAuthority("STUDENT")
                 .antMatchers("/api/teacher").hasAnyAuthority("TEACHER")
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and().addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
