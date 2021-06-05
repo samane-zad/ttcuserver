@@ -3,8 +3,8 @@ package ac.ttcu.controller;
 import ac.ttcu.common.Constants;
 import ac.ttcu.common.Message;
 import ac.ttcu.common.Utils;
+import ac.ttcu.model.entity.dto.UniMajorDTO;
 import ac.ttcu.model.entity.dto.UserDTO;
-import ac.ttcu.model.entity.table.UniMajor;
 import ac.ttcu.model.service.UniMajorService;
 import ac.ttcu.model.service.UserService;
 import ac.ttcu.security.JWTAuth;
@@ -39,12 +39,12 @@ public class AuthenticationController {
 
     @PostMapping(value = "/signUp")
     @ResponseBody
-    private ResponseEntity<Message> signUp(@RequestBody UserDTO user, @RequestBody UniMajor uniMajor) {
+    private ResponseEntity<Message> signUp(@RequestBody UserDTO user, @RequestBody UniMajorDTO uniMajor) {
         Message message;
         try {
             logger.info("Request to save user ");
 //            UniMajor uniMajor1 = uniMajorService.findUniMajorById(user.getUniMajor().getId());
-            user.setUniMajor(uniMajor);
+//            user.setUniMajor(uniMajor);
 
             userService.save(user);
             message = new Message(HttpStatus.OK, Constants.SIGN_UP_SUCCEEDED.name(), user);
