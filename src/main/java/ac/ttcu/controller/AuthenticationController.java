@@ -3,8 +3,8 @@ package ac.ttcu.controller;
 import ac.ttcu.common.Constants;
 import ac.ttcu.common.Message;
 import ac.ttcu.common.Utils;
+import ac.ttcu.model.entity.dto.UserDTO;
 import ac.ttcu.model.entity.table.UniMajor;
-import ac.ttcu.model.entity.table.User;
 import ac.ttcu.model.service.UniMajorService;
 import ac.ttcu.model.service.UserService;
 import ac.ttcu.security.JWTAuth;
@@ -39,23 +39,21 @@ public class AuthenticationController {
 
     @PostMapping(value = "/signUp")
     @ResponseBody
-    private ResponseEntity<Message> signUp(@RequestBody User user) {
+    private ResponseEntity<Message> signUp(@RequestBody UserDTO user, @RequestBody UniMajor uniMajor) {
         Message message;
         try {
             logger.info("Request to save user ");
-            UniMajor uniMajor = uniMajorService.findUniMajorById(user.getUniMajor().getId());
+//            UniMajor uniMajor1 = uniMajorService.findUniMajorById(user.getUniMajor().getId());
             user.setUniMajor(uniMajor);
-            if (utils.isUserAlreadyDefined(user.getUsername())) {
-                message=new Message(HttpStatus.NOT_ACCEPTABLE,Constants.USERNAME_ALREADY_DEFINED);
-            } else {
-                userService.save(user);
-                message=new Message(HttpStatus.OK,Constants.SIGN_UP_SUCCEEDED,user);
-            }
+
+            userService.save(user);
+            message = new Message(HttpStatus.OK, Constants.SIGN_UP_SUCCEEDED.name(), user);
             return ResponseEntity.ok(message);
+
         } catch (Exception e) {
             logger.error("Error while saving user info ");
             logger.error(e.getMessage());
-            message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.SIGN_UP_FAILED);
+            message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.SIGN_UP_FAILED.name());
             return ResponseEntity.ok(message);
         }
     }
@@ -68,12 +66,12 @@ public class AuthenticationController {
             manager.authenticate(new UsernamePasswordAuthenticationToken(jwtAuth.getUsername(), jwtAuth.getPassword()));
             logger.info("Successfully authenticated {}", jwtAuth.getUsername());
             response.addHeader("Authorization", jwtUtils.generateToken(jwtAuth.getUsername()));
-            message = new Message(HttpStatus.OK, Constants.LOGIN_SUCCEEDED);
+            message = new Message(HttpStatus.OK, Constants.LOGIN_SUCCEEDED.name());
             return ResponseEntity.status(message.getHttpStatus()).body(message);
 
         } catch (BadCredentialsException be) {
             logger.info("Bad credentials");
-            message = new Message(HttpStatus.UNAUTHORIZED, Constants.LOGIN_FAILED);
+            message = new Message(HttpStatus.UNAUTHORIZED, Constants.LOGIN_FAILED.name());
             return ResponseEntity.status(message.getHttpStatus()).body(message);
         }
 

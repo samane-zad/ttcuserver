@@ -1,5 +1,7 @@
 package ac.ttcu.model.service;
 
+import ac.ttcu.model.entity.dto.UserDTO;
+import ac.ttcu.model.entity.mapper.UserMapper;
 import ac.ttcu.model.entity.table.User;
 import ac.ttcu.model.repository.UserRepository;
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
+    UserMapper userMapper;
 
 
     public User userFindOne(String username,String password) throws Exception {
@@ -28,9 +31,9 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void save(User user) throws Exception {
+    public void save(UserDTO user) throws Exception {
         logger.info("Save Entity " + user.getfName() + " " + user.getlName());
-        userRepository.save(user);
+        userRepository.save(userMapper.toEntity(user));
     }
 
     @Override

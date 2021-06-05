@@ -6,9 +6,10 @@ public enum Universities {
     ENGHELAB_TECHNICAL_COLLEGE("دانشکده پسرانه انقلاب اسلامی"),
     SHAMSIPOUR_TECHNICAL_COLLEGE("دانشکده پسران شمسی پور");
 
-   public final String Universities;
+    private final String university;
 
-    private Universities(String universities) {
-        Universities = universities;
+    Universities(String message) {
+        this.university = message;
     }
+
 }
