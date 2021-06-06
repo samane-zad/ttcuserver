@@ -18,7 +18,7 @@ public class UserDTO implements Serializable {
     @NotNull
     private String userType;
     private String adminCode;
-    private UniMajor uniMajor;
+    private UniMajorDTO uniMajor;
 
     public long getId() {
         return id;
@@ -76,11 +76,11 @@ public class UserDTO implements Serializable {
         this.adminCode = adminCode;
     }
 
-    public UniMajor getUniMajor() {
+    public UniMajorDTO getUniMajor() {
         return uniMajor;
     }
 
-    public void setUniMajor(UniMajor uniMajor) {
+    public void setUniMajor(UniMajorDTO uniMajor) {
         this.uniMajor = uniMajor;
     }
 }

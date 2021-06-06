@@ -20,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -39,12 +40,10 @@ public class AuthenticationController {
 
     @PostMapping(value = "/signUp")
     @ResponseBody
-    private ResponseEntity<Message> signUp(@RequestBody UserDTO user, @RequestBody UniMajorDTO uniMajor) {
+    private ResponseEntity<Message> signUp(@RequestBody UserDTO user) {
         Message message;
         try {
             logger.info("Request to save user ");
-//            UniMajor uniMajor1 = uniMajorService.findUniMajorById(user.getUniMajor().getId());
-//            user.setUniMajor(uniMajor);
 
             userService.save(user);
             message = new Message(HttpStatus.OK, Constants.SIGN_UP_SUCCEEDED.name(), user);

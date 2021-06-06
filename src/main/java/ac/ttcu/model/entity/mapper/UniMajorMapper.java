@@ -7,9 +7,11 @@ import ac.ttcu.model.entity.table.UniMajor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", imports = UniMajor.class, uses = {UniMajorDTO.class, UniMajor.class})
 public interface UniMajorMapper {
+    UniMajorMapper INSTNCE= Mappers.getMapper(UniMajorMapper.class);
     @Mappings({
             @Mapping(target = "uni", expression = "java(mapUni(uniMajorDTO.getUni()))"),
             @Mapping(target = "major", expression = "java(mapMajor(uniMajorDTO.getMajor()))")

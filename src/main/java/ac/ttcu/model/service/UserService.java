@@ -1,7 +1,10 @@
 package ac.ttcu.model.service;
 
+import ac.ttcu.model.entity.dto.UniMajorDTO;
 import ac.ttcu.model.entity.dto.UserDTO;
+import ac.ttcu.model.entity.mapper.UniMajorMapper;
 import ac.ttcu.model.entity.mapper.UserMapper;
+import ac.ttcu.model.entity.table.UniMajor;
 import ac.ttcu.model.entity.table.User;
 import ac.ttcu.model.repository.UserRepository;
 import org.slf4j.Logger;
@@ -13,6 +16,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class UserService implements UserDetailsService {
@@ -21,7 +26,10 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
-    UserMapper userMapper;
+    @Autowired
+    UniMajorService uniMajorService;
+
+
 
 
     public User userFindOne(String username,String password) throws Exception {
@@ -31,9 +39,12 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void save(UserDTO user) throws Exception {
-        logger.info("Save Entity " + user.getfName() + " " + user.getlName());
-        userRepository.save(userMapper.toEntity(user));
+    public void save(UserDTO userDTO) throws Exception {
+        logger.info("Save Entity " + userDTO.getfName() + " " + userDTO.getlName());
+        Optional<UniMajorDTO> uniMajorDTO=uniMajorService.findUniMajor(userDTO.getUniMajor());
+        User user=UserMapper.INSTANCE.toEntity(userDTO);
+        user.setUniMajor(UniMajorMapper.INSTNCE.toEntity(uniMajorDTO.get()));
+        userRepository.save(user);
     }
 
     @Override
