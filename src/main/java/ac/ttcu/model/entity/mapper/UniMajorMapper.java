@@ -9,19 +9,19 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", imports = UniMajor.class, uses = {UniMajorDTO.class, UniMajor.class})
+@Mapper(componentModel = "spring",  uses = {UniMajorDTO.class, UniMajor.class})
 public interface UniMajorMapper {
-    UniMajorMapper INSTNCE= Mappers.getMapper(UniMajorMapper.class);
-    @Mappings({
-            @Mapping(target = "uni", expression = "java(mapUni(uniMajorDTO.getUni()))"),
-            @Mapping(target = "major", expression = "java(mapMajor(uniMajorDTO.getMajor()))")
-    })
+    UniMajorMapper INSTANCE= Mappers.getMapper(UniMajorMapper.class);
+//    @Mappings({
+//            @Mapping(target = "uni", expression = "java(mapUni(uniMajorDTO.getUni()))"),
+//            @Mapping(target = "major", expression = "java(mapMajor(uniMajorDTO.getMajor()))")
+//    })
     UniMajor toEntity(UniMajorDTO uniMajorDTO);
 
-    @Mappings({
-            @Mapping(target = "uni", expression = "java(mapUni(uniMajor.getUni()))"),
-            @Mapping(target = "major", expression = "java(mapMajor(uniMajor.getMajor()))")
-    })
+//    @Mappings({
+//            @Mapping(target = "uni", expression = "java(mapUni(uniMajor.getUni()))"),
+//            @Mapping(target = "major", expression = "java(mapMajor(uniMajor.getMajor()))")
+//    })
     UniMajorDTO toDTO(UniMajor uniMajor);
 
     default Universities mapUni(String uni) {

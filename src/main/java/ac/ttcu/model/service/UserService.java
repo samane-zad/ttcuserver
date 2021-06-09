@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService {
         logger.info("Save Entity " + userDTO.getfName() + " " + userDTO.getlName());
         Optional<UniMajorDTO> uniMajorDTO=uniMajorService.findUniMajor(userDTO.getUniMajor());
         User user=UserMapper.INSTANCE.toEntity(userDTO);
-        user.setUniMajor(UniMajorMapper.INSTNCE.toEntity(uniMajorDTO.get()));
+        user.setUniMajor(UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
         userRepository.save(user);
     }
 

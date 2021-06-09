@@ -1,9 +1,11 @@
 package ac.ttcu.model.entity.dto;
 
+import ac.ttcu.common.UserType;
 import ac.ttcu.model.entity.table.UniMajor;
 import com.sun.istack.NotNull;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class UserDTO implements Serializable {
     private long id;
@@ -16,7 +18,7 @@ public class UserDTO implements Serializable {
     @NotNull
     private String password;
     @NotNull
-    private String userType;
+    private List<UserType> userType;
     private String adminCode;
     private UniMajorDTO uniMajor;
 
@@ -60,12 +62,12 @@ public class UserDTO implements Serializable {
         this.password = password;
     }
 
-    public String getUserType() {
-        return userType;
+    public void setUserType(List<UserType> userType) {
+        this.userType = userType;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public List<UserType> getUserType() {
+        return userType;
     }
 
     public String getAdminCode() {

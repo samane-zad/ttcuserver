@@ -20,9 +20,9 @@ public class UniMajorService {
 
 
     public Optional<UniMajorDTO> findUniMajor(UniMajorDTO uniMajorDTO) throws Exception {
-        Optional<UniMajor> uniMajor= uniMajorRepository.findUniMajorByName(Universities.valueOf(uniMajorDTO.getUni())
-                , Majors.valueOf(uniMajorDTO.getMajor()));
-        return Optional.ofNullable(UniMajorMapper.INSTNCE.toDTO(uniMajor.get()));
+        Optional<UniMajor> uniMajor= uniMajorRepository.findUniMajorByName(Universities.valueOf(uniMajorDTO.getUni().name())
+                , Majors.valueOf(uniMajorDTO.getMajor().name()));
+        return Optional.ofNullable(UniMajorMapper.INSTANCE.toDTO(uniMajor.get()));
     }
 
 }

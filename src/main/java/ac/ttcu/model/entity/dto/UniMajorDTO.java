@@ -1,5 +1,7 @@
 package ac.ttcu.model.entity.dto;
 
+import ac.ttcu.common.Majors;
+import ac.ttcu.common.Universities;
 import com.sun.istack.NotNull;
 
 import java.io.Serializable;
@@ -7,10 +9,10 @@ import java.io.Serializable;
 public class UniMajorDTO implements Serializable {
     private Integer id;
     @NotNull
-    private String uni;
+    private Universities uni;
     @NotNull
 
-    private String major;
+    private Majors major;
 
     public Integer getId() {
         return id;
@@ -20,19 +22,19 @@ public class UniMajorDTO implements Serializable {
         this.id = id;
     }
 
-    public String getUni() {
+    public Universities getUni() {
         return uni;
     }
 
-    public void setUni(String uni) {
+    public void setUni(Universities uni) {
         this.uni = uni;
     }
 
-    public String getMajor() {
+    public Majors getMajor() {
         return major;
     }
 
-    public void setMajor(String major) {
+    public void setMajor(Majors major) {
         this.major = major;
     }
 }
