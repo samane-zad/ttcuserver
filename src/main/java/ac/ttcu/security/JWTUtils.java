@@ -10,7 +10,7 @@ import java.util.Date;
 @Component
 public class JWTUtils {
 
-    private final String SECRET = "secret";
+    private final String SECRET = "../resources/jwtRS256.key";
 
     public String generateToken(String username) {
         return Jwts.builder()
