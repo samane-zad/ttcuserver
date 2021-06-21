@@ -3,7 +3,9 @@ package ac.ttcu.model.entity.dto;
 import ac.ttcu.common.UserType;
 import ac.ttcu.model.entity.table.UniMajor;
 import com.sun.istack.NotNull;
+import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.List;
 

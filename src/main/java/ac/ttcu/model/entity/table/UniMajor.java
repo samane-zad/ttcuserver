@@ -33,6 +33,10 @@ public class UniMajor implements Serializable {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Universities getUni() {
         return uni;
     }

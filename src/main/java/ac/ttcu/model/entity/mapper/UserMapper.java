@@ -8,12 +8,11 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 
-@Mapper(componentModel = "spring", uses = {UserDTO.class, User.class})
+@Mapper(componentModel = "spring", imports = {UserDTO.class, User.class})
 public interface UserMapper {
     UserMapper INSTANCE= Mappers.getMapper(UserMapper.class);
 
 
-    @Mapping(target = "uniMajor",ignore = true)
     User toEntity(UserDTO userDTO);
 
 
