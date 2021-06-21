@@ -25,16 +25,19 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthenticationController {
     private static Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
-    @Autowired
-    Utils utils;
-    @Autowired
-    private JWTUtils jwtUtils;
-    @Autowired
-    private AuthenticationManager manager;
-    @Autowired
-    UserService userService;
-    @Autowired
-    UniMajorService uniMajorService;
+    final Utils utils;
+    private final JWTUtils jwtUtils;
+    private final AuthenticationManager manager;
+    final UserService userService;
+    final UniMajorService uniMajorService;
+
+    public AuthenticationController(Utils utils, JWTUtils jwtUtils, AuthenticationManager manager, UserService userService, UniMajorService uniMajorService) {
+        this.utils = utils;
+        this.jwtUtils = jwtUtils;
+        this.manager = manager;
+        this.userService = userService;
+        this.uniMajorService = uniMajorService;
+    }
 
     @PostMapping(value = "/signUp")
     @ResponseBody
