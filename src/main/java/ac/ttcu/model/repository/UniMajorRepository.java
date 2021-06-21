@@ -1,7 +1,7 @@
 package ac.ttcu.model.repository;
 
-import ac.ttcu.common.Majors;
-import ac.ttcu.common.Universities;
+import ac.ttcu.common.enumerations.Majors;
+import ac.ttcu.common.enumerations.Universities;
 import ac.ttcu.model.entity.table.UniMajor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

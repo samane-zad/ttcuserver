@@ -1,7 +1,7 @@
 package ac.ttcu.model.service;
 
-import ac.ttcu.common.Majors;
-import ac.ttcu.common.Universities;
+import ac.ttcu.common.enumerations.Majors;
+import ac.ttcu.common.enumerations.Universities;
 import ac.ttcu.model.entity.dto.UniMajorDTO;
 import ac.ttcu.model.entity.mapper.UniMajorMapper;
 import ac.ttcu.model.entity.table.UniMajor;

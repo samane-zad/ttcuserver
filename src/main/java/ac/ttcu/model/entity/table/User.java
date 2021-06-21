@@ -1,6 +1,6 @@
 package ac.ttcu.model.entity.table;
 
-import ac.ttcu.common.UserType;
+import ac.ttcu.common.enumerations.UserType;
 import com.sun.istack.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

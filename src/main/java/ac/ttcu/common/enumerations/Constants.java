@@ -1,4 +1,4 @@
-package ac.ttcu.common;
+package ac.ttcu.common.enumerations;
 
 public enum Constants {
     SIGN_UP_SUCCEEDED("User signed up successfully"),

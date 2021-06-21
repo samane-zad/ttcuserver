@@ -1,4 +1,4 @@
-package ac.ttcu.common;
+package ac.ttcu.common.enumerations;
 
 public enum Universities {
     SHARIATY_TECHNICAL_COLLEGE,

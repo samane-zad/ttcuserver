@@ -1,11 +1,9 @@
 package ac.ttcu.model.entity.dto;
 
-import ac.ttcu.common.Majors;
-import ac.ttcu.common.Universities;
+import ac.ttcu.common.enumerations.Majors;
+import ac.ttcu.common.enumerations.Universities;
 import com.sun.istack.NotNull;
-import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
 
 public class UniMajorDTO implements Serializable {

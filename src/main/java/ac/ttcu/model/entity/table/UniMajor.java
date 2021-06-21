@@ -1,7 +1,7 @@
 package ac.ttcu.model.entity.table;
 
-import ac.ttcu.common.Majors;
-import ac.ttcu.common.Universities;
+import ac.ttcu.common.enumerations.Majors;
+import ac.ttcu.common.enumerations.Universities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;

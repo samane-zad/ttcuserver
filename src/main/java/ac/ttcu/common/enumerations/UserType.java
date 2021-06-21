@@ -1,4 +1,4 @@
-package ac.ttcu.common;
+package ac.ttcu.common.enumerations;
 
 import org.springframework.security.core.GrantedAuthority;
 

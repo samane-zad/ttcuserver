@@ -1,9 +1,8 @@
 package ac.ttcu.controller;
 
-import ac.ttcu.common.Constants;
+import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.common.Message;
 import ac.ttcu.common.Utils;
-import ac.ttcu.model.entity.dto.UniMajorDTO;
 import ac.ttcu.model.entity.dto.UserDTO;
 import ac.ttcu.model.service.UniMajorService;
 import ac.ttcu.model.service.UserService;
@@ -20,7 +19,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
