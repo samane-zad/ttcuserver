@@ -6,6 +6,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -16,16 +17,22 @@ import java.util.Arrays;
 @Component
 public class LoggerAspect {
     Logger logger= LoggerFactory.getLogger(LoggerAspect.class);
+    private final Environment env;
 
-    @Pointcut("execution( * ac.ttcu.controller.*(..)) || execution(* ac.ttcu.model.*.*(..))")
+    public LoggerAspect(Environment env) {
+        this.env = env;
+    }
+
+
+    @Pointcut("execution( * ac.ttcu.controller.*.*(..)) || execution(* ac.ttcu.model.*.*.*(..))")
     public void applicationPackagePointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }
 
-    @Pointcut("execution( * ac.ttcu.controller.*(..))")
-    public void  applicationRestPointcut() {
-        // Method is empty as this is just a Pointcut, the implementations are in the advices.
-    }
+//    @Pointcut("execution( * ac.ttcu.controller.*(..))")
+//    public void  applicationRestPointcut() {
+//        // Method is empty as this is just a Pointcut, the implementations are in the advices.
+//    }
 
     @AfterThrowing(pointcut = "applicationPackagePointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
@@ -36,7 +43,7 @@ public class LoggerAspect {
 
 
     @Around("applicationPackagePointcut()")
-    public void logBeforePointCut(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object logBeforePointCut(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.debug("Enter: {}.{}() with argument[s] = {}\n", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(), Arrays.toString(joinPoint.getArgs()));
 
@@ -44,5 +51,6 @@ public class LoggerAspect {
 
         logger.debug("Exit: {}.{}() with result = {}\n", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(), pointCutResult);
+        return pointCutResult;
     }
 }
