@@ -18,7 +18,7 @@ public class Content implements Serializable {
     @NotNull
     private String description;
     @Lob
-    private Byte[] image;
+    private byte[] image;
     private String contact;
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -48,11 +48,11 @@ public class Content implements Serializable {
         this.description = description;
     }
 
-    public Byte[] getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(Byte[] image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
