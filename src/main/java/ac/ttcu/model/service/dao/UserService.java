@@ -1,10 +1,9 @@
-package ac.ttcu.model.service;
+package ac.ttcu.model.service.dao;
 
 import ac.ttcu.model.entity.dto.UniMajorDTO;
 import ac.ttcu.model.entity.dto.UserDTO;
 import ac.ttcu.model.entity.mapper.UniMajorMapper;
 import ac.ttcu.model.entity.mapper.UserMapper;
-import ac.ttcu.model.entity.table.UniMajor;
 import ac.ttcu.model.entity.table.User;
 import ac.ttcu.model.repository.UserRepository;
 import org.slf4j.Logger;

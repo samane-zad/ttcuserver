@@ -6,7 +6,7 @@ import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.model.entity.dto.UserDTO;
 import ac.ttcu.model.entity.mapper.UserMapper;
 import ac.ttcu.model.entity.table.User;
-import ac.ttcu.model.service.UserService;
+import ac.ttcu.model.service.dao.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/api")
-public class UserController {
-    private static Logger logger = LoggerFactory.getLogger(UserController.class);
+public class UserInfoInquiryResource {
+    private static Logger logger = LoggerFactory.getLogger(UserInfoInquiryResource.class);
     @Autowired
     UserService userService;
 

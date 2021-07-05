@@ -1,6 +1,6 @@
 package ac.ttcu.security;
 
-import ac.ttcu.model.service.UserService;
+import ac.ttcu.model.service.dao.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

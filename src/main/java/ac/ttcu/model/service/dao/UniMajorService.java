@@ -1,4 +1,4 @@
-package ac.ttcu.model.service;
+package ac.ttcu.model.service.dao;
 
 import ac.ttcu.common.enumerations.Majors;
 import ac.ttcu.common.enumerations.Universities;

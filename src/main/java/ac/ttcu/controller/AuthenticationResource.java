@@ -4,8 +4,8 @@ import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.common.Message;
 import ac.ttcu.common.Utils;
 import ac.ttcu.model.entity.dto.UserDTO;
-import ac.ttcu.model.service.UniMajorService;
-import ac.ttcu.model.service.UserService;
+import ac.ttcu.model.service.dao.UniMajorService;
+import ac.ttcu.model.service.dao.UserService;
 import ac.ttcu.security.JWTAuth;
 import ac.ttcu.security.JWTUtils;
 import org.slf4j.Logger;
@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthenticationController {
-    private static Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+public class AuthenticationResource {
+    private static Logger logger = LoggerFactory.getLogger(AuthenticationResource.class);
 
     @Autowired
     private Utils utils;
