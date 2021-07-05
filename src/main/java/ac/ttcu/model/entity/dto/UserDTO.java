@@ -84,4 +84,23 @@ public class UserDTO implements Serializable {
     public void setUniMajor(UniMajorDTO uniMajor) {
         this.uniMajor = uniMajor;
     }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "id=" + getId() +
+                ", fname='" + getfName() + "'" +
+                ", lname='" + getlName() + "'" +
+                ", username='" + getUsername() + "'" +
+                ", password='" + getPassword() + "'" +
+                ", userType='" + getUserType() + "'" +
+                ", uniMajor='" + getUniMajor() + "'" +
+                ", title='" + getTitle() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", contact='" + getContact() + "'" +
+                ", image='" + getImage() + "'" +
+                ", postType='" + getPostType() + "'"+
+                "}";
+
+    }
 }

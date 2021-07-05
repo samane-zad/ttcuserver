@@ -37,4 +37,14 @@ public class UniMajorDTO implements Serializable {
     public void setMajor(Majors major) {
         this.major = major;
     }
+
+    @Override
+    public String toString() {
+        return "UniMajorDTO{" +
+                "id=" + getId() +
+                ", uni='" + getUni() + "'" +
+                ", major='" + getMajor() + "'" +
+                "}";
+
+    }
 }

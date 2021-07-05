@@ -52,4 +52,6 @@ public class UniMajor implements Serializable {
     public void setMajor(Majors major) {
         this.major = major;
     }
+
+
 }
