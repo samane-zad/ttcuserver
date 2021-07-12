@@ -6,7 +6,7 @@ import com.sun.istack.NotNull;
 
 import java.io.Serializable;
 
-public class UniMajorDTO implements Serializable {
+public class UniMajorDTO extends Entity implements Serializable {
     private Integer id;
     @NotNull
     private Universities uni;
@@ -38,13 +38,4 @@ public class UniMajorDTO implements Serializable {
         this.major = major;
     }
 
-    @Override
-    public String toString() {
-        return "UniMajorDTO{" +
-                "id=" + getId() +
-                ", uni='" + getUni() + "'" +
-                ", major='" + getMajor() + "'" +
-                "}";
-
-    }
 }

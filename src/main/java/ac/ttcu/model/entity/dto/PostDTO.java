@@ -5,10 +5,11 @@ import ac.ttcu.common.enumerations.UserType;
 import com.sun.istack.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.io.Serializable;
 
-public class PostDTO implements Serializable {
+public class PostDTO extends Entity implements Serializable {
 
     private long id;
     @NotNull

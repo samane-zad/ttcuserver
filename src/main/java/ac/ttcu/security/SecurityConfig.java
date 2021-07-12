@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/auth/login").permitAll()
                 .antMatchers("/auth/signUp").hasAnyAuthority("ADMIN", "MASTER")
-                .antMatchers("/api/teacher").hasAnyAuthority("TEACHER")
+                .antMatchers("/api/teacher").hasAnyAuthority("TEACHER", "ADMIN", "MASTER")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().sessionManagement()

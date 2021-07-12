@@ -6,7 +6,7 @@ import com.sun.istack.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-public class UserDTO implements Serializable {
+public class UserDTO extends Entity implements Serializable {
     private long id;
     @NotNull
     private String fName;
@@ -85,22 +85,4 @@ public class UserDTO implements Serializable {
         this.uniMajor = uniMajor;
     }
 
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-                "id=" + getId() +
-                ", fname='" + getfName() + "'" +
-                ", lname='" + getlName() + "'" +
-                ", username='" + getUsername() + "'" +
-                ", password='" + getPassword() + "'" +
-                ", userType='" + getUserType() + "'" +
-                ", uniMajor='" + getUniMajor() + "'" +
-                ", title='" + getTitle() + "'" +
-                ", description='" + getDescription() + "'" +
-                ", contact='" + getContact() + "'" +
-                ", image='" + getImage() + "'" +
-                ", postType='" + getPostType() + "'"+
-                "}";
-
-    }
 }
