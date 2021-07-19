@@ -25,7 +25,7 @@ public class PostService {
 
 
     public void save(PostDTO postDTO) throws Exception {
-        logger.info("Save Entity " + postDTO.getTitle() + " " + postDTO.getPostType());
+        logger.info("Save Post from " + postDTO.getUsername() + "with Title " + postDTO.getTitle());
         Optional<UniMajorDTO> uniMajorDTO = uniMajorService.findUniMajor(postDTO.getUniMajor());
         Post post = PostMapper.INSTANCE.toEntity(postDTO);
         post.setUniMajor(UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));

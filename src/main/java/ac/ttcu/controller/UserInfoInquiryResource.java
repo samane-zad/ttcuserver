@@ -29,13 +29,20 @@ public class UserInfoInquiryResource {
 
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
     public ResponseEntity<Message> getUserInfo(@RequestHeader HttpHeaders httpHeaders) {
-        String username = Utils.fetchUsername(httpHeaders);
-        logger.info("Fetching user info for user: {}", username);
         Message message;
-        User user = (User) userService.loadUserByUsername(username);
-        UserDTO userDTO = UserMapper.INSTANCE.toDTO(user);
-        message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), userDTO);
+        try {
+            String username = Utils.fetchUsername(httpHeaders);
+            logger.info("Fetching user info for user: {}", username);
+
+            User user = (User) userService.loadUserByUsername(username);
+            UserDTO userDTO = UserMapper.INSTANCE.toDTO(user);
+            message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), userDTO);
+        } catch (Exception e) {
+            logger.error("Operation failed by error:{}", e.getMessage());
+            message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.OPERATION_FAILED.name());
+        }
         return ResponseEntity.status(message.getHttpStatus()).body(message);
+
     }
 
 }

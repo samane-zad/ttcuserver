@@ -1,8 +1,8 @@
 package ac.ttcu.controller;
 
-import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.common.Message;
 import ac.ttcu.common.Utils;
+import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.model.entity.dto.UserDTO;
 import ac.ttcu.model.service.dao.UniMajorService;
 import ac.ttcu.model.service.dao.UserService;
@@ -47,14 +47,13 @@ public class AuthenticationResource {
 
             userService.save(user);
             message = new Message(HttpStatus.OK, Constants.SIGN_UP_SUCCEEDED.name(), user);
-            return ResponseEntity.ok(message);
 
         } catch (Exception e) {
-            logger.error("Error while saving user info ");
+            logger.error("Error while saving user info with cause:{} ", e.getMessage());
             logger.error(e.getMessage());
             message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.SIGN_UP_FAILED.name());
-            return ResponseEntity.ok(message);
         }
+        return ResponseEntity.status(message.getHttpStatus()).body(message);
     }
 
     @PostMapping(value = "/login", produces = "application/json")
@@ -66,13 +65,12 @@ public class AuthenticationResource {
             logger.info("Successfully authenticated {}", jwtAuth.getUsername());
             response.addHeader("Authorization", jwtUtils.generateToken(jwtAuth.getUsername()));
             message = new Message(HttpStatus.OK, Constants.LOGIN_SUCCEEDED.name());
-            return ResponseEntity.status(message.getHttpStatus()).body(message);
 
         } catch (BadCredentialsException be) {
             logger.info("Bad credentials");
             message = new Message(HttpStatus.UNAUTHORIZED, Constants.LOGIN_FAILED.name());
-            return ResponseEntity.status(message.getHttpStatus()).body(message);
         }
+        return ResponseEntity.status(message.getHttpStatus()).body(message);
 
     }
 
