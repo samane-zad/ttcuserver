@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -30,5 +32,37 @@ public class PostService {
         Post post = PostMapper.INSTANCE.toEntity(postDTO);
         post.setUniMajor(UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
         postRepository.save(post);
+    }
+
+    public List<PostDTO> findAll(PostDTO postDTO) throws Exception {
+        logger.info("Find All Posts for User: {},Type: {},UniMajor: {}-{}", postDTO.getUsername(),
+                postDTO.getTitle(), postDTO.getUniMajor().getUni(), postDTO.getUniMajor().getMajor());
+        List<Post> postList;
+        List<PostDTO> postDTOList;
+        if (Objects.nonNull(postDTO.getUniMajor())) {
+            Optional<UniMajorDTO> uniMajorDTO = uniMajorService.findUniMajor(postDTO.getUniMajor());
+            if (Objects.nonNull(postDTO.getTitle())) {
+                postList = postRepository.findByTypeAndUniMajor(postDTO.getPostType(),
+                        UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
+            } else {
+                postList = postRepository.findByUniMajor(UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
+            }
+        } else {
+            if (Objects.nonNull(postDTO.getTitle())) {
+                postList = postRepository.findByType(postDTO.getPostType());
+            } else {
+                postDTOList = null;
+                return postDTOList;
+            }
+        }
+        postDTOList = PostMapper.INSTANCE.toDTO(postList);
+        return postDTOList;
+    }
+
+
+    public List<PostDTO> findAllForUser(PostDTO postDTO) {
+        List<Post> postList = postRepository.findByUsername(postDTO.getUsername());
+        List<PostDTO> postDTOList = PostMapper.INSTANCE.toDTO(postList);
+        return postDTOList;
     }
 }
