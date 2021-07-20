@@ -1,17 +1,16 @@
 package ac.ttcu.controller;
 
 import ac.ttcu.common.Message;
+import ac.ttcu.common.Utils;
 import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.model.entity.dto.PostDTO;
 import ac.ttcu.model.service.dao.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,13 +40,14 @@ public class PostInquiryResource {
         return ResponseEntity.status(message.getHttpStatus()).body(message);
     }
 
-    @RequestMapping(value = "/userPostInquiry", method = RequestMethod.POST)
-    public ResponseEntity<Message> fetchUserPosts(@RequestBody PostDTO postDTO) {
+    @RequestMapping(value = "/userPostInquiry", method = RequestMethod.GET)
+    public ResponseEntity<Message> fetchUserPosts(@RequestHeader HttpHeaders httpHeaders) {
         Message message;
         try {
-            logger.info("Fetch postList: {}", postDTO);
+            String username = Utils.fetchUsername(httpHeaders);
+            logger.info("Fetch postList: {}", username);
 
-            List<PostDTO> postDTOList = postService.findAllForUser(postDTO);
+            List<PostDTO> postDTOList = postService.findAllForUser(username);
             message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), postDTOList);
 
         } catch (Exception e) {

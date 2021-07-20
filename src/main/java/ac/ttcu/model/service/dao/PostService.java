@@ -60,8 +60,8 @@ public class PostService {
     }
 
 
-    public List<PostDTO> findAllForUser(PostDTO postDTO) {
-        List<Post> postList = postRepository.findByUsername(postDTO.getUsername());
+    public List<PostDTO> findAllForUser(String username) {
+        List<Post> postList = postRepository.findByUsername(username);
         List<PostDTO> postDTOList = PostMapper.INSTANCE.toDTO(postList);
         return postDTOList;
     }

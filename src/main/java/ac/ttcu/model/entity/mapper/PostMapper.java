@@ -4,7 +4,6 @@ import ac.ttcu.model.entity.dto.PostDTO;
 import ac.ttcu.model.entity.table.Post;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,11 +24,16 @@ public interface PostMapper {
     List<PostDTO> toDTO(List<Post> entityList);
 
     default byte[] mapImage(MultipartFile image) throws IOException {
-        return image.getBytes();
+        if (image != null)
+            return image.getBytes();
+        else return null;
     }
 
     default MultipartFile mapImage(byte[] image) {
-        return (MultipartFile) new ByteArrayResource(image);
+//        if(image!=null)
+//        return (MultipartFile) new ByteArrayResource(image);
+//        else return null;
+        return null;
     }
 
 }
