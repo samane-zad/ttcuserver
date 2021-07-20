@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
@@ -33,6 +34,9 @@ public class PostInquiryResource {
             List<PostDTO> postDTOList = postService.findAll(postDTO);
             message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), postDTOList);
 
+        } catch (NoSuchElementException ne) {
+            message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), "No Posts Found");
+            return ResponseEntity.status(message.getHttpStatus()).body(message);
         } catch (Exception e) {
             logger.error("Operation failed by error:{}", e.getMessage());
             message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.OPERATION_FAILED.name());
@@ -48,8 +52,15 @@ public class PostInquiryResource {
             logger.info("Fetch postList: {}", username);
 
             List<PostDTO> postDTOList = postService.findAllForUser(username);
+            if (postDTOList == null) {
+                message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), "No Posts Found");
+                return ResponseEntity.status(message.getHttpStatus()).body(message);
+            }
             message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), postDTOList);
 
+        } catch (NoSuchElementException ne) {
+            message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), "No Posts Found");
+            return ResponseEntity.status(message.getHttpStatus()).body(message);
         } catch (Exception e) {
             logger.error("Operation failed by error:{}", e.getMessage());
             message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.OPERATION_FAILED.name());

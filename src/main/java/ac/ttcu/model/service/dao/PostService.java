@@ -35,8 +35,7 @@ public class PostService {
     }
 
     public List<PostDTO> findAll(PostDTO postDTO) throws Exception {
-        logger.info("Find All Posts for User: {},Type: {},UniMajor: {}-{}", postDTO.getUsername(),
-                postDTO.getTitle(), postDTO.getUniMajor().getUni(), postDTO.getUniMajor().getMajor());
+        logger.info("Find All Posts for {}", postDTO);
         List<Post> postList;
         List<PostDTO> postDTOList;
         if (Objects.nonNull(postDTO.getUniMajor())) {
@@ -48,7 +47,7 @@ public class PostService {
                 postList = postRepository.findByUniMajor(UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
             }
         } else {
-            if (Objects.nonNull(postDTO.getTitle())) {
+            if (Objects.nonNull(postDTO.getPostType())) {
                 postList = postRepository.findByType(postDTO.getPostType());
             } else {
                 postDTOList = null;
