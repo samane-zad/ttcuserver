@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.security.acl.NotOwnerException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -40,7 +41,7 @@ public class PostService {
         List<PostDTO> postDTOList;
         if (Objects.nonNull(postDTO.getUniMajor())) {
             Optional<UniMajorDTO> uniMajorDTO = uniMajorService.findUniMajor(postDTO.getUniMajor());
-            if (Objects.nonNull(postDTO.getTitle())) {
+            if (Objects.nonNull(postDTO.getPostType())) {
                 postList = postRepository.findByTypeAndUniMajor(postDTO.getPostType(),
                         UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
             } else {
@@ -60,8 +61,17 @@ public class PostService {
 
 
     public List<PostDTO> findAllForUser(String username) {
+        logger.info("Find All Posts for {}", username);
         List<Post> postList = postRepository.findByUsername(username);
         List<PostDTO> postDTOList = PostMapper.INSTANCE.toDTO(postList);
         return postDTOList;
+    }
+
+    public void deletePost(PostDTO postDTO, String username) throws NotOwnerException {
+        logger.info("Delete post with id {}", postDTO.getId());
+        Optional<Post> post = postRepository.findById(postDTO.getId());
+        if (post.get().getUsername().contentEquals(username))
+            postRepository.delete(post.get());
+        else throw new NotOwnerException();
     }
 }

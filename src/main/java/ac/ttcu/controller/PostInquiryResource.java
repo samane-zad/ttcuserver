@@ -25,7 +25,7 @@ public class PostInquiryResource {
         this.postService = postService;
     }
 
-    @RequestMapping(value = "/postInquiry", method = RequestMethod.POST)
+    @RequestMapping(value = "/postInquiry", method = RequestMethod.GET)
     public ResponseEntity<Message> fetchPosts(@RequestBody PostDTO postDTO) {
         Message message;
         try {
