@@ -51,7 +51,7 @@ public class AuthenticationResource {
         } catch (Exception e) {
             logger.error("Error while saving user info with cause:{} ", e.getMessage());
             logger.error(e.getMessage());
-            message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.SIGN_UP_FAILED.name());
+            message = new Message(HttpStatus.BAD_REQUEST, Constants.SIGN_UP_FAILED.name());
         }
         return ResponseEntity.status(message.getHttpStatus()).body(message);
     }
@@ -63,8 +63,7 @@ public class AuthenticationResource {
         try {
             manager.authenticate(new UsernamePasswordAuthenticationToken(jwtAuth.getUsername(), jwtAuth.getPassword()));
             logger.info("Successfully authenticated {}", jwtAuth.getUsername());
-            response.addHeader("Authorization", jwtUtils.generateToken(jwtAuth.getUsername()));
-            message = new Message(HttpStatus.OK, Constants.LOGIN_SUCCEEDED.name());
+            message = new Message(HttpStatus.OK, Constants.LOGIN_SUCCEEDED.name(), jwtUtils.generateToken(jwtAuth.getUsername()));
 
         } catch (BadCredentialsException be) {
             logger.info("Bad credentials");

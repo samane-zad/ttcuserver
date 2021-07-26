@@ -6,7 +6,8 @@ public enum Constants {
     LOGIN_SUCCEEDED("User logged in successfully"),
     LOGIN_FAILED("Error occurred while login"),
     OPERATION_DONE_SUCCESSFULLY("Operation is done successfully"),
-    OPERATION_FAILED("Operation is failed by an error");
+    OPERATION_FAILED("Operation is failed by an error"),
+    NO_POSTS_FOUND("No posts found");
     private final String message;
 
     Constants(String message) {

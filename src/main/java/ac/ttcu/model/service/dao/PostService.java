@@ -74,4 +74,12 @@ public class PostService {
             postRepository.delete(post.get());
         else throw new NotOwnerException();
     }
+
+    public void updatePost(PostDTO postDTO, String username) throws NotOwnerException {
+        logger.info("Update post with id {}", postDTO.getId());
+        Optional<Post> post = postRepository.findById(postDTO.getId());
+        if (post.get().getUsername().contentEquals(username))
+            postRepository.save(post.get());
+        else throw new NotOwnerException();
+    }
 }

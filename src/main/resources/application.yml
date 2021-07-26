@@ -8,6 +8,7 @@ spring:
 
 
 
+
   # Oracle settings
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:xe
@@ -25,6 +26,9 @@ spring:
       hibernate.cache.hazelcast.instance_name: TTCU
     hibernate:
       ddl-auto: none
+
+
+
 
 
 
