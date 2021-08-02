@@ -17,4 +17,10 @@ public class Utils {
         return username;
     }
 
+    public static String fetchUserType() {
+        String role = JWTUtils.getUserType();
+        role = role.replace('[', ' ').replace(']', ' ').trim();
+        return role;
+    }
+
 }

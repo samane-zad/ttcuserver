@@ -3,6 +3,7 @@ package ac.ttcu.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -22,5 +23,10 @@ public class JWTUtils {
 
     public static String getUsername(String token) {
         return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public static String getUserType() {
+        String role = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+        return role;
     }
 }

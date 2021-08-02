@@ -3,6 +3,7 @@ package ac.ttcu.controller;
 import ac.ttcu.common.Message;
 import ac.ttcu.common.Utils;
 import ac.ttcu.common.enumerations.Constants;
+import ac.ttcu.common.enumerations.UserType;
 import ac.ttcu.model.entity.dto.PostDTO;
 import ac.ttcu.model.service.dao.PostService;
 import org.slf4j.Logger;
@@ -31,6 +32,7 @@ public class PostUpdateResource {
         Message message;
         try {
             logger.info("Update post: {}", postDTO.getId());
+            postDTO.setUserType(UserType.valueOf(Utils.fetchUserType()));
             String username = Utils.fetchUsername(httpHeaders);
             postService.updatePost(postDTO, username);
             message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name());
