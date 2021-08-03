@@ -1,5 +1,6 @@
 package ac.ttcu.model.entity.dto;
 
+import ac.ttcu.common.Utils;
 import ac.ttcu.common.enumerations.PostTypes;
 import ac.ttcu.common.enumerations.UserType;
 import com.sun.istack.NotNull;
@@ -8,6 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.Date;
+import java.util.Objects;
+
 
 public class PostDTO extends Entity implements Serializable {
 
@@ -28,6 +33,8 @@ public class PostDTO extends Entity implements Serializable {
     @NotNull
     @Enumerated(EnumType.STRING)
     private PostTypes postType;
+    private String pDate;
+    private String pTime;
 
     public long getId() {
         return id;
@@ -99,6 +106,26 @@ public class PostDTO extends Entity implements Serializable {
 
     public void setPostType(PostTypes postType) {
         this.postType = postType;
+    }
+
+    public String getpDate() {
+        if(Objects.isNull(this.pDate))
+            return Utils.getPersianDate(Date.from(Instant.now()));
+        else return this.pDate;
+    }
+
+    public String getpTime() {
+        if(Objects.isNull(this.pTime))
+            return Utils.getPersianTime(Date.from(Instant.now()));
+        else return this.pTime;
+    }
+
+    public void setpDate(String pDate) {
+        this.pDate = pDate;
+    }
+
+    public void setpTime(String pTime) {
+        this.pTime = pTime;
     }
 
     @Override

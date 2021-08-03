@@ -32,6 +32,8 @@ public class Post implements Serializable {
     @NotNull
     @Enumerated(EnumType.STRING)
     private PostTypes postType;
+    private String pDate;
+    private String pTime;
 
     public long getId() {
         return id;
@@ -103,5 +105,21 @@ public class Post implements Serializable {
 
     public void setPostType(PostTypes postType) {
         this.postType = postType;
+    }
+
+    public String getpDate() {
+        return pDate;
+    }
+
+    public void setpDate(String pDate) {
+        this.pDate = pDate;
+    }
+
+    public String getpTime() {
+        return pTime;
+    }
+
+    public void setpTime(String pTime) {
+        this.pTime = pTime;
     }
 }

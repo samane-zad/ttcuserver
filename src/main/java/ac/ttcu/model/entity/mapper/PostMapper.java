@@ -3,6 +3,7 @@ package ac.ttcu.model.entity.mapper;
 import ac.ttcu.model.entity.dto.PostDTO;
 import ac.ttcu.model.entity.table.Post;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.springframework.web.multipart.MultipartFile;
 

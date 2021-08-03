@@ -25,7 +25,7 @@ spring:
       hibernate.connection.provider_disables_autocommit: false
       hibernate.cache.hazelcast.instance_name: TTCU
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 
 
 
