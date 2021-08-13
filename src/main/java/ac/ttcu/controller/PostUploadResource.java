@@ -7,6 +7,7 @@ import ac.ttcu.common.enumerations.PostTypes;
 import ac.ttcu.common.enumerations.UserType;
 import ac.ttcu.model.entity.dto.PostDTO;
 import ac.ttcu.model.service.dao.PostService;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -58,7 +59,10 @@ public class PostUploadResource {
 
         } catch (Exception e) {
             logger.error("Operation failed by error:{}", e.getMessage());
-            message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.OPERATION_FAILED.name());
+            if (e instanceof NotFoundException)
+                message = new Message(HttpStatus.NOT_FOUND, e.getMessage());
+            else
+                message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.OPERATION_FAILED.name());
         }
         return ResponseEntity.status(message.getHttpStatus()).body(message);
     }

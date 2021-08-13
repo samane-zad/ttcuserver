@@ -78,11 +78,13 @@ public class PostService {
         else throw new NotOwnerException();
     }
 
-    public void updatePost(PostDTO postDTO, String username) throws NotOwnerException {
+    public void updatePost(PostDTO postDTO, String username) throws Exception {
         logger.info("Update post with id {}", postDTO.getId());
         Optional<Post> post = postRepository.findById(postDTO.getId());
-        if (post.get().getUsername().contentEquals(username))
-            postRepository.save(post.get());
-        else throw new NotOwnerException();
+        if (post.get().getUsername().contentEquals(username)) {
+            Optional<UniMajorDTO> uniMajorDTO = uniMajorService.findUniMajor(postDTO.getUniMajor());
+            postRepository.updatePost(postDTO.getPostType(), postDTO.getTitle(),
+                    postDTO.getDescription(), postDTO.getContact(), UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
+        } else throw new NotOwnerException();
     }
 }

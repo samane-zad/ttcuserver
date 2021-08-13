@@ -8,6 +8,7 @@ import ac.ttcu.model.service.dao.UniMajorService;
 import ac.ttcu.model.service.dao.UserService;
 import ac.ttcu.security.JWTAuth;
 import ac.ttcu.security.JWTUtils;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/auth")
@@ -50,15 +49,17 @@ public class AuthenticationResource {
 
         } catch (Exception e) {
             logger.error("Error while saving user info with cause:{} ", e.getMessage());
-            logger.error(e.getMessage());
-            message = new Message(HttpStatus.BAD_REQUEST, Constants.SIGN_UP_FAILED.name());
+            if (e instanceof NotFoundException)
+                message = new Message(HttpStatus.NOT_FOUND, e.getMessage());
+            else
+                message = new Message(HttpStatus.BAD_REQUEST, Constants.SIGN_UP_FAILED.name());
         }
         return ResponseEntity.status(message.getHttpStatus()).body(message);
     }
 
     @PostMapping(value = "/login", produces = "application/json")
     @ResponseBody
-    private ResponseEntity<Message> login(@RequestBody JWTAuth jwtAuth, HttpServletResponse response) {
+    private ResponseEntity<Message> login(@RequestBody JWTAuth jwtAuth) {
         Message message;
         try {
             manager.authenticate(new UsernamePasswordAuthenticationToken(jwtAuth.getUsername(), jwtAuth.getPassword()));

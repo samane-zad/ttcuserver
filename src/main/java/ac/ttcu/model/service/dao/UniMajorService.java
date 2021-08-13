@@ -1,11 +1,13 @@
 package ac.ttcu.model.service.dao;
 
+import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.common.enumerations.Majors;
 import ac.ttcu.common.enumerations.Universities;
 import ac.ttcu.model.entity.dto.UniMajorDTO;
 import ac.ttcu.model.entity.mapper.UniMajorMapper;
 import ac.ttcu.model.entity.table.UniMajor;
 import ac.ttcu.model.repository.UniMajorRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,22 +25,10 @@ public class UniMajorService {
 
         Optional<UniMajor> uniMajor = uniMajorRepository.findUniMajorByName(Universities.valueOf(uniMajorDTO.getUni().name())
                 , Majors.valueOf(uniMajorDTO.getMajor().name()));
+        if (!uniMajor.isPresent())
+            throw new NotFoundException(Constants.NO_UNIMAJOR_FOUND.name());
         return Optional.ofNullable(UniMajorMapper.INSTANCE.toDTO(uniMajor.get()));
     }
 
-//    public List<UniMajorDTO> findAllUniMajor(UniMajorDTO uniMajorDTO) throws Exception {
-//        Optional<UniMajor> uniMajor;
-//        if (Objects.nonNull(uniMajorDTO.getUni())&&Objects.nonNull(uniMajorDTO.getMajor())) {
-//            uniMajor = uniMajorRepository.findUniMajorByName(Universities.valueOf(uniMajorDTO.getUni().name())
-//                    , Majors.valueOf(uniMajorDTO.getMajor().name()));
-//        }else if (Objects.nonNull(uniMajorDTO.getUni()))
-//        {
-//            uniMajor = uniMajorRepository.findUniMajorByUni(Universities.valueOf(uniMajorDTO.getUni().name()));
-//        }else
-//        {
-//            uniMajor = uniMajorRepository.findUniMajorByMajor(Majors.valueOf(uniMajorDTO.getMajor().name()));
-//        }
-//        return UniMajorMapper.INSTANCE.toDTO(uniMajor.get()));
-//    }
 
 }
