@@ -36,6 +36,7 @@ public class UserInfoInquiryResource {
 
             User user = (User) userService.loadUserByUsername(username);
             UserDTO userDTO = UserMapper.INSTANCE.toDTO(user);
+            userDTO.setPassword(null);
             message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), userDTO);
         } catch (Exception e) {
             logger.error("Operation failed by error:{}", e.getMessage());

@@ -1,5 +1,8 @@
 package ac.ttcu.model.service.dao;
 
+import ac.ttcu.common.enumerations.Majors;
+import ac.ttcu.common.enumerations.PostTypes;
+import ac.ttcu.common.enumerations.Universities;
 import ac.ttcu.model.entity.dto.PostDTO;
 import ac.ttcu.model.entity.dto.UniMajorDTO;
 import ac.ttcu.model.entity.mapper.PostMapper;
@@ -11,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.security.acl.NotOwnerException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,22 +43,21 @@ public class PostService {
         logger.info("Find All Posts for {}", postDTO);
         List<Post> postList;
         List<PostDTO> postDTOList;
+
+        List<PostTypes> postTypes = Arrays.asList(PostTypes.values());
+        List<Universities> universities = Arrays.asList(Universities.values());
+        List<Majors> majors = Arrays.asList(Majors.values());
+        if (Objects.nonNull(postDTO.getPostType()))
+            postTypes = Arrays.asList(postDTO.getPostType());
+
         if (Objects.nonNull(postDTO.getUniMajor())) {
-            Optional<UniMajorDTO> uniMajorDTO = uniMajorService.findUniMajor(postDTO.getUniMajor());
-            if (Objects.nonNull(postDTO.getPostType())) {
-                postList = postRepository.findByTypeAndUniMajor(postDTO.getPostType(),
-                        UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
-            } else {
-                postList = postRepository.findByUniMajor(UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
-            }
-        } else {
-            if (Objects.nonNull(postDTO.getPostType())) {
-                postList = postRepository.findByType(postDTO.getPostType());
-            } else {
-                postDTOList = null;
-                return postDTOList;
-            }
+            if (Objects.nonNull(postDTO.getUniMajor().getUni()))
+                universities = Arrays.asList(postDTO.getUniMajor().getUni());
+            if (Objects.nonNull(postDTO.getUniMajor().getMajor()))
+                majors = Arrays.asList(postDTO.getUniMajor().getMajor());
         }
+
+        postList = postRepository.findByTypeAndUniMajor(postTypes, universities, majors);
         postDTOList = PostMapper.INSTANCE.toDTO(postList);
         return postDTOList;
     }
