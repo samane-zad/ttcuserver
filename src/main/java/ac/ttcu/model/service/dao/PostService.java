@@ -12,6 +12,7 @@ import ac.ttcu.model.repository.PostRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.acl.NotOwnerException;
 import java.util.Arrays;
@@ -78,13 +79,14 @@ public class PostService {
         else throw new NotOwnerException();
     }
 
+    @Transactional
     public void updatePost(PostDTO postDTO, String username) throws Exception {
         logger.info("Update post with id {}", postDTO.getId());
         Optional<Post> post = postRepository.findById(postDTO.getId());
         if (post.get().getUsername().contentEquals(username)) {
             Optional<UniMajorDTO> uniMajorDTO = uniMajorService.findUniMajor(postDTO.getUniMajor());
             postRepository.updatePost(postDTO.getPostType(), postDTO.getTitle(),
-                    postDTO.getDescription(), postDTO.getContact(), UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
+                    postDTO.getDescription(), postDTO.getContact(), UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()), postDTO.getId());
         } else throw new NotOwnerException();
     }
 }
