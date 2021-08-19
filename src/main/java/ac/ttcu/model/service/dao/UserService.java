@@ -31,13 +31,6 @@ public class UserService implements UserDetailsService {
 
 
 
-    public User userFindOne(String username,String password) throws Exception {
-        logger.info("FindOne Entity:User");
-
-        return userRepository.userFindOne(username,password);
-    }
-
-
     public void save(UserDTO userDTO) throws Exception {
         logger.info("Save Entity " + userDTO.getfName() + " " + userDTO.getlName());
         Optional<UniMajorDTO> uniMajorDTO=uniMajorService.findUniMajor(userDTO.getUniMajor());

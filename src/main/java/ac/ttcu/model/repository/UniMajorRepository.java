@@ -13,10 +13,4 @@ import java.util.Optional;
 public interface UniMajorRepository extends JpaRepository<UniMajor, Long> {
     @Query(value = "select u from UniMajor u where u.uni=?1 and u.major=?2")
     Optional<UniMajor> findUniMajorByName(Universities uni, Majors major);
-
-    @Query(value = "select u from UniMajor u where u.uni=?1")
-    Optional<UniMajor> findUniMajorByUni(Universities uni);
-
-    @Query(value = "select u from UniMajor u where  u.major=?1")
-    Optional<UniMajor> findUniMajorByMajor(Majors major);
 }

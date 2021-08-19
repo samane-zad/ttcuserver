@@ -47,6 +47,8 @@ public class AuthenticationResource {
             userService.save(user);
             message = new Message(HttpStatus.OK, Constants.SIGN_UP_SUCCEEDED.name(), user);
 
+        } catch (NotFoundException nf) {
+            message = new Message(HttpStatus.NOT_FOUND, Constants.NO_UNIMAJOR_FOUND.name());
         } catch (Exception e) {
             logger.error("Error while saving user info with cause:{} ", e.getMessage());
             if (e instanceof NotFoundException)

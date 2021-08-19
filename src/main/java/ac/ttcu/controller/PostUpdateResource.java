@@ -6,6 +6,7 @@ import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.common.enumerations.UserType;
 import ac.ttcu.model.entity.dto.PostDTO;
 import ac.ttcu.model.service.dao.PostService;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -41,6 +42,8 @@ public class PostUpdateResource {
             message = new Message(HttpStatus.NOT_FOUND, Constants.OPERATION_FAILED.name());
         } catch (NotOwnerException noe) {
             message = new Message(HttpStatus.FORBIDDEN, Constants.OPERATION_FAILED.name());
+        } catch (NotFoundException nf) {
+            message = new Message(HttpStatus.NOT_FOUND, Constants.NO_UNIMAJOR_FOUND.name());
         } catch (Exception e) {
             logger.error("Operation failed by error:{}", e.getMessage());
             message = new Message(HttpStatus.INTERNAL_SERVER_ERROR, Constants.OPERATION_FAILED.name());

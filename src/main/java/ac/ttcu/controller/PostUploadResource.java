@@ -57,6 +57,8 @@ public class PostUploadResource {
             postService.save(postDTO);
             message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), postDTO);
 
+        } catch (NotFoundException nf) {
+            message = new Message(HttpStatus.NOT_FOUND, Constants.NO_UNIMAJOR_FOUND.name());
         } catch (Exception e) {
             logger.error("Operation failed by error:{}", e.getMessage());
             if (e instanceof NotFoundException)
