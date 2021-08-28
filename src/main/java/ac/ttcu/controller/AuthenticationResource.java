@@ -24,17 +24,18 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationResource {
     private static Logger logger = LoggerFactory.getLogger(AuthenticationResource.class);
 
-    @Autowired
-    private Utils utils;
-    @Autowired
-    private  JWTUtils jwtUtils;
-    @Autowired
-    private  AuthenticationManager manager;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private UniMajorService uniMajorService;
+    private final Utils utils;
+    private final JWTUtils jwtUtils;
+    private final AuthenticationManager manager;
+    private final UserService userService;
 
+
+    public AuthenticationResource(Utils utils, JWTUtils jwtUtils, AuthenticationManager manager, UserService userService) {
+        this.utils = utils;
+        this.jwtUtils = jwtUtils;
+        this.manager = manager;
+        this.userService = userService;
+    }
 
 
     @PostMapping(value = "/signUp")
