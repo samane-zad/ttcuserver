@@ -1,6 +1,6 @@
 package ac.ttcu.security;
 
-import ac.ttcu.model.service.dao.UserService;
+import ac.ttcu.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/auth/login").permitAll()
                 .antMatchers("/auth/signUp").hasAnyAuthority("ADMIN", "MASTER")
-                .antMatchers("/api/teacher/*").hasAnyAuthority("TEACHER", "ADMIN", "MASTER")
+                .antMatchers("/api/admin/*").hasAnyAuthority( "ADMIN", "MASTER")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().sessionManagement()

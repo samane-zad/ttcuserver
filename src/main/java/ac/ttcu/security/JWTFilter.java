@@ -1,7 +1,7 @@
 package ac.ttcu.security;
 
 import ac.ttcu.model.entity.table.User;
-import ac.ttcu.model.service.dao.UserService;
+import ac.ttcu.model.service.UserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;

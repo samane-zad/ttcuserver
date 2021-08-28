@@ -31,7 +31,6 @@ public class User implements Serializable, UserDetails {
             joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
     @Enumerated(EnumType.STRING)
     private List<UserType> userType;
-    private String adminCode;
     @OneToOne(cascade = CascadeType.MERGE)
     private UniMajor uniMajor;
     private Boolean enabled = true;
@@ -80,14 +79,6 @@ public class User implements Serializable, UserDetails {
 
     public void setUserType(List<UserType> userType) {
         this.userType = userType;
-    }
-
-    public String getAdminCode() {
-        return adminCode;
-    }
-
-    public void setAdminCode(String adminCode) {
-        this.adminCode = adminCode;
     }
 
     public UniMajor getUniMajor() {

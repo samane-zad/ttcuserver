@@ -22,10 +22,6 @@ public class Message {
         this.object = object;
     }
 
-    public Message(HttpStatus httpStatus) {
-        this.httpStatus = httpStatus;
-        this.code=httpStatus.value();
-    }
 
     public Message() {
     }

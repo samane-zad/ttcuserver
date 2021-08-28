@@ -1,4 +1,4 @@
-package ac.ttcu.model.service.dao;
+package ac.ttcu.model.service;
 
 import ac.ttcu.common.enumerations.Majors;
 import ac.ttcu.common.enumerations.PostTypes;

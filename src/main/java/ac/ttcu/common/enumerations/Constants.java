@@ -8,7 +8,8 @@ public enum Constants {
     OPERATION_DONE_SUCCESSFULLY("Operation is done successfully"),
     OPERATION_FAILED("Operation is failed by an error"),
     NO_POSTS_FOUND("No posts found"),
-    NO_UNIMAJOR_FOUND("wrong university and major is selected");
+    NO_UNIMAJOR_FOUND("Wrong university and major is selected"),
+    UNMANAGEABLE_USER("User cannot be managed by this admin");
     private final String message;
 
     Constants(String message) {

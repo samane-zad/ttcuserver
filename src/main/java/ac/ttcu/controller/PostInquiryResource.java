@@ -4,7 +4,7 @@ import ac.ttcu.common.Message;
 import ac.ttcu.common.Utils;
 import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.model.entity.dto.PostDTO;
-import ac.ttcu.model.service.dao.PostService;
+import ac.ttcu.model.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -35,7 +35,7 @@ public class PostInquiryResource {
             message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), postDTOList);
 
         } catch (NoSuchElementException ne) {
-            message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), "No Posts Found");
+            message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), Constants.NO_POSTS_FOUND);
             return ResponseEntity.status(message.getHttpStatus()).body(message);
         } catch (Exception e) {
             logger.error("Operation failed by error:{}", e.getMessage());
@@ -53,13 +53,13 @@ public class PostInquiryResource {
 
             List<PostDTO> postDTOList = postService.findAllForUser(username);
             if (postDTOList == null) {
-                message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), "No Posts Found");
+                message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), Constants.NO_POSTS_FOUND);
                 return ResponseEntity.status(message.getHttpStatus()).body(message);
             }
             message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), postDTOList);
 
         } catch (NoSuchElementException ne) {
-            message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), "No Posts Found");
+            message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name(), Constants.NO_POSTS_FOUND);
             return ResponseEntity.status(message.getHttpStatus()).body(message);
         } catch (Exception e) {
             logger.error("Operation failed by error:{}", e.getMessage());

@@ -4,7 +4,7 @@ import ac.ttcu.common.Message;
 import ac.ttcu.common.Utils;
 import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.model.entity.dto.PostDTO;
-import ac.ttcu.model.service.dao.PostService;
+import ac.ttcu.model.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

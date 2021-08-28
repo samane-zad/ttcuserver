@@ -6,7 +6,7 @@ import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.common.enumerations.PostTypes;
 import ac.ttcu.common.enumerations.UserType;
 import ac.ttcu.model.entity.dto.PostDTO;
-import ac.ttcu.model.service.dao.PostService;
+import ac.ttcu.model.service.PostService;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

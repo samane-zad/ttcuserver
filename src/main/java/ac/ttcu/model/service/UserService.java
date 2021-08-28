@@ -1,5 +1,6 @@
-package ac.ttcu.model.service.dao;
+package ac.ttcu.model.service;
 
+import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.model.entity.dto.UniMajorDTO;
 import ac.ttcu.model.entity.dto.UserDTO;
 import ac.ttcu.model.entity.mapper.UniMajorMapper;
@@ -14,7 +15,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
+import java.security.acl.NotOwnerException;
 import java.util.Optional;
 
 @Service
@@ -43,4 +46,20 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepository.userFindByUsername(s);
     }
+
+    public void delete(UserDTO userDTO)
+    {
+        logger.info("Delete User '{}'" , userDTO.getUsername());
+        User user=userRepository.userFindByUsername(userDTO.getUsername());
+        userRepository.delete(user);
+    }
+    public void delete(UserDTO userDTO,String adminUsername) throws Exception {
+        logger.info("Delete User '{}'" , userDTO.getUsername());
+        User admin=userRepository.userFindByUsername(adminUsername);
+        User user=userRepository.userFindByUsername(userDTO.getUsername());
+        if(admin.getUniMajor().equals(user.getUniMajor()))
+             userRepository.delete(user);
+        else throw new Exception(Constants.UNMANAGEABLE_USER.name());
+    }
+
 }
