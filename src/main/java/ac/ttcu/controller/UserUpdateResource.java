@@ -69,4 +69,25 @@ public class UserUpdateResource {
         }
         return  ResponseEntity.status(message.getHttpStatus()).body(message);
     }
+
+    @PostMapping("/updateUser")
+    private ResponseEntity<Message> updateUser(@RequestBody UserDTO userDTO, @RequestHeader HttpHeaders headers)
+    {
+        Message message;
+        try {
+            userDTO.setUsername(Utils.fetchUsername(headers));
+
+            userService.updatePassword(passwordDTO);
+            message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name());
+
+
+        }catch (Exception e)
+        {
+            logger.error("Delete user failed by error {}",e.getMessage());
+            message=new Message(HttpStatus.INTERNAL_SERVER_ERROR,Constants.OPERATION_FAILED.name());
+        }
+        return  ResponseEntity.status(message.getHttpStatus()).body(message);
+    }
+
+
 }

@@ -36,17 +36,19 @@ public class UserService implements UserDetailsService {
 
 
 
+
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return userRepository.userFindByUsername(s);
+    }
+
     public void save(UserDTO userDTO) throws Exception {
         logger.info("Save Entity " + userDTO.getfName() + " " + userDTO.getlName());
         Optional<UniMajorDTO> uniMajorDTO=uniMajorService.findUniMajor(userDTO.getUniMajor());
         User user=UserMapper.INSTANCE.toEntity(userDTO);
         user.setUniMajor(UniMajorMapper.INSTANCE.toEntity(uniMajorDTO.get()));
         userRepository.save(user);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepository.userFindByUsername(s);
     }
 
     public void delete(UserDTO userDTO)
