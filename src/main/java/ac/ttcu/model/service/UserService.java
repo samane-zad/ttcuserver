@@ -1,8 +1,10 @@
 package ac.ttcu.model.service;
 
 import ac.ttcu.common.enumerations.Constants;
+import ac.ttcu.model.entity.dto.PasswordDTO;
 import ac.ttcu.model.entity.dto.UniMajorDTO;
 import ac.ttcu.model.entity.dto.UserDTO;
+import ac.ttcu.model.entity.dto.UsernameDTO;
 import ac.ttcu.model.entity.mapper.UniMajorMapper;
 import ac.ttcu.model.entity.mapper.UserMapper;
 import ac.ttcu.model.entity.table.User;
@@ -62,4 +64,16 @@ public class UserService implements UserDetailsService {
         else throw new Exception(Constants.UNMANAGEABLE_USER.name());
     }
 
+    public void updateUsername(UsernameDTO usernameDTO)
+    {
+        logger.info("Update User '{}'" , usernameDTO.getOldUsername());
+        User user=userRepository.userFindByUsername(usernameDTO.getOldUsername());
+        userRepository.updateUsername(usernameDTO.getNewUsername(),user.getId());
+    }
+    public void updatePassword(PasswordDTO passwordDTO)
+    {
+        logger.info("Update User '{}' password" , passwordDTO.getUsername());
+        User user=userRepository.userFindByUsername(passwordDTO.getUsername());
+        userRepository.updatePassword(passwordDTO.getNewPassword(),user.getId());
+    }
 }

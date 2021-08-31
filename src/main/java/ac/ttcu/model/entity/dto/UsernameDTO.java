@@ -1,6 +1,8 @@
 package ac.ttcu.model.entity.dto;
 
-public class UsernameDTO extends Entity {
+import java.io.Serializable;
+
+public class UsernameDTO extends Entity implements Serializable {
 
     private String newUsername;
     private String oldUsername;

@@ -29,4 +29,10 @@ public class JWTUtils {
         String role = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         return role;
     }
+
+    public static String getPassword()
+    {
+        String pass = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getCredentials());
+        return pass;
+    }
 }

@@ -31,6 +31,10 @@ public class Utils {
         role = role.replace('[', ' ').replace(']', ' ').trim();
         return role;
     }
+    public static String fetchPassword() {
+        String password = JWTUtils.getPassword();
+        return password;
+    }
 
     public static String convertGregorianToPersian(Date gregorianDate, String pattern) throws NullPointerException, IllegalArgumentException {
         PersianDateFormat persianDateFormat = (PersianDateFormat) getFormat(pattern, null, true);

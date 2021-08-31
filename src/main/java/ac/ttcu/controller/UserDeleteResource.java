@@ -10,10 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -25,11 +22,12 @@ public class UserDeleteResource {
         this.userService = userService;
     }
 
-    @RequestMapping("/deleteUser")
-    private ResponseEntity<Message> deleteUser(@RequestBody UserDTO userDTO, @RequestHeader HttpHeaders headers)
+    @PostMapping("/deleteUser")
+    private ResponseEntity<Message> deleteUser( @RequestHeader HttpHeaders headers)
     {
         Message message;
        try {
+           UserDTO userDTO=new UserDTO();
            userDTO.setUsername(Utils.fetchUsername(headers));
            userService.delete(userDTO);
            message=new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name());
@@ -45,7 +43,7 @@ public class UserDeleteResource {
        return  ResponseEntity.status(message.getHttpStatus()).body(message);
     }
 
-    @RequestMapping("/admin/deleteUser")
+    @PostMapping("/admin/deleteUser")
     private ResponseEntity<Message> deleteUserByAdmin(@RequestBody UserDTO userDTO, @RequestHeader HttpHeaders headers)
     {
         Message message;
