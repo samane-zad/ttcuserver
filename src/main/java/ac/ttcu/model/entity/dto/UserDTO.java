@@ -18,7 +18,6 @@ public class UserDTO extends Entity implements Serializable {
     private String password;
     @NotNull
     private List<UserType> userType;
-    private String adminCode;
     private UniMajorDTO uniMajor;
 
     public long getId() {
@@ -67,14 +66,6 @@ public class UserDTO extends Entity implements Serializable {
 
     public List<UserType> getUserType() {
         return userType;
-    }
-
-    public String getAdminCode() {
-        return adminCode;
-    }
-
-    public void setAdminCode(String adminCode) {
-        this.adminCode = adminCode;
     }
 
     public UniMajorDTO getUniMajor() {

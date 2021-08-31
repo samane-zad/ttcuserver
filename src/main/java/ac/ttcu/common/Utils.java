@@ -59,12 +59,12 @@ public class Utils {
 
     public static String getPersianDate(Date date)
     {
-        String[] dateTime = convertGregorianToPersian(Date.from(Instant.now()), "yyyy/MM/dd HH:mm").split("\\s");
+        String[] dateTime = convertGregorianToPersian(date.from(Instant.now()), "yyyy/MM/dd HH:mm").split("\\s");
         return dateTime[0];
     }
     public static String getPersianTime(Date date)
     {
-        String[] dateTime = convertGregorianToPersian(Date.from(Instant.now()), "yyyy/MM/dd HH:mm").split("\\s");
+        String[] dateTime = convertGregorianToPersian(date.from(Instant.now()), "yyyy/MM/dd HH:mm").split("\\s");
         return dateTime[1];
     }
 }

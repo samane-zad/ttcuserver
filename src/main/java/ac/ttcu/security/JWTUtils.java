@@ -1,6 +1,7 @@
 package ac.ttcu.security;
 
 
+import ac.ttcu.model.entity.table.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,7 +33,7 @@ public class JWTUtils {
 
     public static String getPassword()
     {
-        String pass = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getCredentials());
-        return pass;
+        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return user.getPassword();
     }
 }
