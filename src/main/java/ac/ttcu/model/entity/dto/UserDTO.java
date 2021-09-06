@@ -2,6 +2,7 @@ package ac.ttcu.model.entity.dto;
 
 import ac.ttcu.common.enumerations.UserType;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
@@ -9,15 +10,22 @@ import java.util.List;
 public class UserDTO extends Entity implements Serializable {
     private long id;
     @NotNull
+    @NotBlank
     private String fName;
     @NotNull
+    @NotBlank
     private String lName;
     @NotNull
+    @NotBlank
     private String username;
     @NotNull
+    @NotBlank
     private String password;
     @NotNull
+    @NotBlank
     private List<UserType> userType;
+    @NotNull
+    @NotBlank
     private UniMajorDTO uniMajor;
 
     public long getId() {

@@ -19,6 +19,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationResource {
@@ -27,7 +29,7 @@ public class AuthenticationResource {
     @Autowired
     private Utils utils;
     @Autowired
-    private  JWTUtils jwtUtils;
+    private JWTUtils jwtUtils;
     @Autowired
     private  AuthenticationManager manager;
     @Autowired
@@ -36,10 +38,9 @@ public class AuthenticationResource {
     private UniMajorService uniMajorService;
 
 
-
     @PostMapping(value = "/signUp")
     @ResponseBody
-    private ResponseEntity<Message> signUp(@RequestBody UserDTO user) {
+    private ResponseEntity<Message> signUp(@Valid @RequestBody UserDTO user) {
         Message message;
         try {
             logger.info("Request to save user ");

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -40,7 +41,7 @@ public class PostUploadResource {
 
     @RequestMapping(value = "/uploadPost", method = RequestMethod.POST)
     public ResponseEntity<Message> saveStudentPost(@Nullable @RequestPart("image") MultipartFile image,
-                                                   @RequestBody PostDTO postDTO,
+                                                   @Valid @RequestBody PostDTO postDTO,
                                                    @RequestHeader HttpHeaders httpHeaders) {
         Message message;
         try {

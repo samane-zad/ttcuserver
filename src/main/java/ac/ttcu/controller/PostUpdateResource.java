@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.acl.NotOwnerException;
 import java.util.NoSuchElementException;
 
@@ -28,7 +29,7 @@ public class PostUpdateResource {
     }
 
     @RequestMapping(value = "/postUpdate", method = RequestMethod.POST)
-    public ResponseEntity<Message> fetchPosts(@RequestBody PostDTO postDTO,
+    public ResponseEntity<Message> fetchPosts(@Valid @RequestBody PostDTO postDTO,
                                               @RequestHeader HttpHeaders httpHeaders) {
         Message message;
         try {

@@ -14,10 +14,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class UserUpdateResource {
-    private Logger logger= LoggerFactory.getLogger(UserUpdateResource.class);
+    private Logger logger = LoggerFactory.getLogger(UserUpdateResource.class);
     private final UserService userService;
 
     public UserUpdateResource(UserService userService) {
@@ -25,17 +27,14 @@ public class UserUpdateResource {
     }
 
     @PostMapping("/updateUsername")
-    private ResponseEntity<Message> updateUsername(@RequestBody UsernameDTO userDTO, @RequestHeader HttpHeaders headers)
-    {
+    private ResponseEntity<Message> updateUsername(@Valid @RequestBody UsernameDTO userDTO, @RequestHeader HttpHeaders headers) {
         Message message;
         try {
-            if(userDTO.getOldUsername().equals(Utils.fetchUsername(headers))) {
+            if (userDTO.getOldUsername().equals(Utils.fetchUsername(headers))) {
                 userService.updateUsername(userDTO);
                 message = new Message(HttpStatus.OK, Constants.OPERATION_DONE_SUCCESSFULLY.name());
-            }
-            else
-            {
-                message=new Message(HttpStatus.FORBIDDEN, Constants.OPERATION_FAILED.name());
+            } else {
+                message = new Message(HttpStatus.FORBIDDEN, Constants.OPERATION_FAILED.name());
             }
 
         }catch (Exception e)

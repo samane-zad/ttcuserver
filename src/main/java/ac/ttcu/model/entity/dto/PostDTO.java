@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
@@ -17,24 +18,27 @@ import java.util.Objects;
 public class PostDTO extends Entity implements Serializable {
 
     private long id;
-    @NotNull
     private String username;
-    @NotNull
     @Enumerated(EnumType.STRING)
     private UserType userType;
     @NotNull
+    @NotBlank
     private UniMajorDTO uniMajor;
+    @NotBlank
     @NotNull
     private String title;
     @NotNull
+    @NotBlank
     private String description;
     private MultipartFile image;
     private String contact;
     @NotNull
+    @NotBlank
     @Enumerated(EnumType.STRING)
     private PostTypes postType;
     private String pDate;
     private String pTime;
+
 
     public long getId() {
         return id;
