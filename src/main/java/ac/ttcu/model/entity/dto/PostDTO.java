@@ -3,11 +3,11 @@ package ac.ttcu.model.entity.dto;
 import ac.ttcu.common.Utils;
 import ac.ttcu.common.enumerations.PostTypes;
 import ac.ttcu.common.enumerations.UserType;
-import com.sun.istack.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;

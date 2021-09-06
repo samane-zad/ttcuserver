@@ -1,10 +1,13 @@
 package ac.ttcu.model.entity.dto;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class UsernameDTO extends Entity implements Serializable {
 
+    @NotNull
     private String newUsername;
+    @NotNull
     private String oldUsername;
 
     public String getNewUsername() {

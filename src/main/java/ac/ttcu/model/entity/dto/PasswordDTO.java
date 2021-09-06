@@ -1,10 +1,14 @@
 package ac.ttcu.model.entity.dto;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class PasswordDTO extends Entity implements Serializable {
+
     private String username;
+    @NotNull
     private String oldPassword;
+    @NotNull
     private String newPassword;
 
     public String getUsername() {

@@ -1,8 +1,8 @@
 package ac.ttcu.model.entity.dto;
 
 import ac.ttcu.common.enumerations.UserType;
-import com.sun.istack.NotNull;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 

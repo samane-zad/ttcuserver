@@ -2,8 +2,8 @@ package ac.ttcu.model.entity.dto;
 
 import ac.ttcu.common.enumerations.Majors;
 import ac.ttcu.common.enumerations.Universities;
-import com.sun.istack.NotNull;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class UniMajorDTO extends Entity implements Serializable {
