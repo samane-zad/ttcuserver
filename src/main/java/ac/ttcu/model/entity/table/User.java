@@ -30,6 +30,7 @@ public class User implements Serializable, UserDetails {
             name = "authorities",
             joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
     @Enumerated(EnumType.STRING)
+
     private List<UserType> userType;
     @OneToOne(cascade = CascadeType.MERGE)
     private UniMajor uniMajor;

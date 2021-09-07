@@ -80,6 +80,14 @@ public class PostService {
     }
 
     @Transactional
+    public void updatePostUsername(PostDTO postDTO, String username) throws Exception {
+        logger.info("Update post with id {}", postDTO.getId());
+        Optional<Post> post = postRepository.findById(postDTO.getId());
+        postRepository.updatePostUsername(username, postDTO.getId());
+
+    }
+
+    @Transactional
     public void updatePost(PostDTO postDTO, String username) throws Exception {
         logger.info("Update post with id {}", postDTO.getId());
         Optional<Post> post = postRepository.findById(postDTO.getId());

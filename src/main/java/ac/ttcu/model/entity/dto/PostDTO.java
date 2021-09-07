@@ -22,7 +22,6 @@ public class PostDTO extends Entity implements Serializable {
     @Enumerated(EnumType.STRING)
     private UserType userType;
     @NotNull
-    @NotBlank
     private UniMajorDTO uniMajor;
     @NotBlank
     @NotNull
@@ -33,7 +32,6 @@ public class PostDTO extends Entity implements Serializable {
     private MultipartFile image;
     private String contact;
     @NotNull
-    @NotBlank
     @Enumerated(EnumType.STRING)
     private PostTypes postType;
     private String pDate;

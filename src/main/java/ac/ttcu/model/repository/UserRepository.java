@@ -30,4 +30,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "update User  u set u.fName=?1,u.lName=?2 where u.id=?3")
     void updateUser(String fName, String lName, Long id);
 
+    @Modifying
+    @Query(value = "update authorities set username=?1 where username=?2", nativeQuery = true)
+    void updateUserRoll(String newUser, String OldUser);
+
 }

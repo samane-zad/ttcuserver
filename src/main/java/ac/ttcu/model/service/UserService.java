@@ -64,11 +64,12 @@ public class UserService implements UserDetailsService {
         else throw new Exception(Constants.UNMANAGEABLE_USER.name());
     }
 
-    public void updateUsername(UsernameDTO usernameDTO)
-    {
+    @Transactional
+    public void updateUsername(UsernameDTO usernameDTO) {
         logger.info("Update User '{}'", usernameDTO.getOldUsername());
         User user = userRepository.userFindByUsername(usernameDTO.getOldUsername());
         userRepository.updateUsername(usernameDTO.getNewUsername(), user.getId());
+        userRepository.updateUserRoll(usernameDTO.getNewUsername(), usernameDTO.getOldUsername());
     }
 
     public void updatePassword(PasswordDTO passwordDTO) {
