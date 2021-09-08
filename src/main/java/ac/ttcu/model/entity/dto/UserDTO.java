@@ -4,6 +4,7 @@ import ac.ttcu.common.enumerations.UserType;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,9 +18,11 @@ public class UserDTO extends Entity implements Serializable {
     private String lName;
     @NotNull
     @NotBlank
+    @Size(min = 8)
     private String username;
     @NotNull
     @NotBlank
+    @Size(min = 8)
     private String password;
     @NotNull
     private List<UserType> userType;

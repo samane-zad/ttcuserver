@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -30,6 +31,7 @@ public class PostDTO extends Entity implements Serializable {
     @NotBlank
     private String description;
     private MultipartFile image;
+    @Email
     private String contact;
     @NotNull
     @Enumerated(EnumType.STRING)
