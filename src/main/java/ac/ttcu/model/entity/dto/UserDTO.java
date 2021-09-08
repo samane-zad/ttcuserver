@@ -22,10 +22,8 @@ public class UserDTO extends Entity implements Serializable {
     @NotBlank
     private String password;
     @NotNull
-    @NotBlank
     private List<UserType> userType;
     @NotNull
-    @NotBlank
     private UniMajorDTO uniMajor;
 
     public long getId() {
