@@ -4,6 +4,7 @@ import ac.ttcu.common.Message;
 import ac.ttcu.common.Utils;
 import ac.ttcu.common.enumerations.Constants;
 import ac.ttcu.model.entity.dto.UserDTO;
+import ac.ttcu.model.service.PostService;
 import ac.ttcu.model.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserDeleteResource {
     private Logger logger= LoggerFactory.getLogger(UserDeleteResource.class);
     private final UserService userService;
+    private final PostService postService;
 
-    public UserDeleteResource(UserService userService) {
+    public UserDeleteResource(UserService userService, PostService postService) {
         this.userService = userService;
+        this.postService = postService;
     }
 
     @PostMapping("/deleteUser")

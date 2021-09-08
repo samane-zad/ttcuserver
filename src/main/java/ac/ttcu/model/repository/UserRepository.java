@@ -1,17 +1,19 @@
 package ac.ttcu.model.repository;
 
+import ac.ttcu.model.entity.table.UniMajor;
 import ac.ttcu.model.entity.table.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
 
-
-    @Query(value="select u from User u where u.username=?1")
+    @Query(value = "select u from User u where u.username=?1")
     User userFindByUsername(String username);
 
     @Modifying
@@ -33,5 +35,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query(value = "update authorities set username=?1 where username=?2", nativeQuery = true)
     void updateUserRoll(String newUser, String OldUser);
+
+    @Query(value = "select u from User u where u.uniMajor=?1")
+    List<User> findByUniMajor(UniMajor uniMajor);
 
 }
