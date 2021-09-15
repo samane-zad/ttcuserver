@@ -106,6 +106,10 @@
             <artifactId>persiancalendar</artifactId>
             <version>2.1.7</version>
         </dependency>
+        <dependency>
+            <artifactId>commons-lang3</artifactId>
+            <groupId>org.apache.commons</groupId>
+        </dependency>
     </dependencies>
 
     <build>
